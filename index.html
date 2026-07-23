@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beijing House · Authentic Chinese Restaurant · Tampa, FL</title>
+  <meta name="description" content="Beijing House — authentic Sichuan &amp; Northern Chinese cuisine in Tampa Bay. Order pickup on Chowbus, or delivery via Uber Eats and DoorDash. Griddle-cooked dry pots, spicy boiled fish, hand-folded wontons.">
+  <meta name="theme-color" content="#A82724">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:title" content="Beijing House · Authentic Chinese · Tampa, FL">
+  <meta property="og:description" content="Griddle-cooked dry pots, spicy boiled fish, hand-folded wontons. Order pickup or delivery.">
+  <meta property="og:type" content="restaurant">
+  <meta property="og:image" content="assets/img/og-cover.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Noto+Serif+SC:wght@400;600;900&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============================================================= -->
+<!-- STICKY HEADER — appears after you scroll past the hero        -->
+<!-- ============================================================= -->
+<header class="site-header" id="siteHeader">
+  <a href="#top" class="site-header__brand">
+    <span class="seal seal--sm" aria-hidden="true"><span>北</span><span>京</span><span>桃</span><span>园</span></span>
+    <span class="site-header__name">BEIJING HOUSE</span>
+  </a>
+  <nav class="site-header__nav" aria-label="Primary">
+    <a href="#story">Our Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#catering">Catering</a>
+    <a href="#visit">Find Us</a>
+    <a class="btn btn--sm btn--solid" data-link="order" href="#order">Order</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile slide-down menu -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <a href="#story">Our Story</a>
+  <a href="#menu">Menu</a>
+  <a href="#order">Order</a>
+  <a href="#catering">Catering</a>
+  <a href="#careers">Join the Family</a>
+  <a href="#visit">Find Us</a>
+</nav>
+
+<main>
+
+<!-- ============================================================= -->
+<!-- HERO — full-screen video with image fallback                 -->
+<!-- ============================================================= -->
+<section class="hero" id="top">
+  <div class="hero__media">
+    <!-- Drop a compressed loop at assets/video/hero.mp4 and a still at assets/img/hero-poster.jpg -->
+    <video class="hero__video" autoplay muted loop playsinline poster="assets/img/hero-poster.jpg">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero__scrim"></div>
+  </div>
+
+  <!-- Nav overlay -->
+  <div class="hero__nav reveal-hero">
+    <div class="hero__nav-left">
+      <a href="#story">Our Story</a>
+      <a href="#careers">Join the Family</a>
+    </div>
+    <a href="#top" class="hero__brand">
+      <span class="seal" aria-hidden="true"><span>北</span><span>京</span><span>桃</span><span>园</span></span>
+      <span class="hero__brand-name">BEIJING HOUSE</span>
+    </a>
+    <div class="hero__nav-right">
+      <a data-link="reserve" href="tel:813-513-882">Reserve a Table</a>
+      <a href="#catering">Catering</a>
+      <a href="#visit">Find Us</a>
+    </div>
+  </div>
+
+  <!-- Bottom actions -->
+  <div class="hero__actions reveal-hero">
+    <p class="hero__tagline" data-bind="tagline">Authentic Beijing · Warm Humanity · Timeless Craft</p>
+    <div class="hero__buttons">
+      <a class="btn btn--solid btn--lg" data-link="order" href="#order" target="_blank" rel="noopener">Order</a>
+      <a class="btn btn--cream btn--lg" data-link="menu" href="assets/menu/menu.pdf" target="_blank" rel="noopener">View Menu (PDF)</a>
+    </div>
+    <a href="#order" class="hero__scroll" aria-label="Scroll down">
+      <span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- ORDER                                                         -->
+<!-- ============================================================= -->
+<section class="section" id="order">
+  <div class="wrap">
+    <div class="section__head section__head--center reveal">
+      <div class="eyebrow">外卖 · 自取</div>
+      <h2 class="display">Order Tonight</h2>
+    </div>
+    <div class="order-grid">
+      <div class="order-card order-card--feature reveal">
+        <div class="order-card__tag order-card__tag--gold">Pickup · Best Value</div>
+        <div class="order-card__title display">Order directly from us</div>
+        <p class="order-card__body">Skip the third-party fees. Order through our own system and your food is ready when you arrive.</p>
+        <a class="btn btn--cream" data-link="chowbus" href="#" target="_blank" rel="noopener">Order on Chowbus →</a>
+      </div>
+      <div class="order-card reveal">
+        <div class="order-card__tag">Delivery</div>
+        <div class="order-card__title display">Uber Eats</div>
+        <p class="order-card__body">Hot delivery across Tampa Bay.</p>
+        <a class="btn btn--outline" data-link="uber" href="#" target="_blank" rel="noopener">Order Delivery →</a>
+      </div>
+      <div class="order-card reveal">
+        <div class="order-card__tag">Delivery</div>
+        <div class="order-card__title display">DoorDash</div>
+        <p class="order-card__body">Hot delivery across Tampa Bay.</p>
+        <a class="btn btn--outline" data-link="doordash" href="#" target="_blank" rel="noopener">Order Delivery →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- MENU                                                          -->
+<!-- ============================================================= -->
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div>
+        <div class="eyebrow">菜单</div>
+        <h2 class="display">Signatures of the House</h2>
+      </div>
+      <a class="btn btn--outline" data-link="menu" href="assets/menu/menu.pdf" target="_blank" rel="noopener">Full Menu (PDF) ↓</a>
+    </div>
+    <div class="dish-grid">
+
+      <article class="dish reveal">
+        <div class="dish__photo" data-slot="mala xiang guo"></div>
+        <div class="dish__cn">麻辣香锅</div>
+        <h3 class="dish__en">Griddle-Cooked Spicy Pot</h3>
+        <p class="dish__desc">Build-your-own dry pot, wok-seared with chili, peppercorn, and our house spice blend.</p>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__photo" data-slot="shui zhu yu"></div>
+        <div class="dish__cn">水煮鱼</div>
+        <h3 class="dish__en">Spicy Boiled Fish</h3>
+        <p class="dish__desc">Silky fish fillets in roiling chili broth, finished with sizzling hot oil.</p>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__photo" data-slot="chili oil wontons"></div>
+        <div class="dish__cn">红油抄手</div>
+        <h3 class="dish__en">Chili Oil Wontons</h3>
+        <p class="dish__desc">Hand-folded wontons bathed in our slow-infused house chili oil.</p>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__photo" data-slot="noodles / dumplings"></div>
+        <div class="dish__cn">京味经典</div>
+        <h3 class="dish__en">Northern Classics</h3>
+        <p class="dish__desc">Hand-pulled noodles, dumplings, and the comfort dishes of old Beijing.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- STORY                                                         -->
+<!-- ============================================================= -->
+<section class="story" id="story">
+  <div class="wrap story__grid">
+    <div class="reveal">
+      <div class="eyebrow eyebrow--gold">我们的故事</div>
+      <h2 class="display display--light">A Taste of Home —<br>From Our Family to Yours</h2>
+      <p class="story__p">Beijing House is a family-owned restaurant built on a simple mission — to bring the most authentic Chinese flavors to the heart of Tampa Bay. Since 2017, we've served dishes that honor our heritage, blending the bold heat of Sichuan cuisine with the rich comfort of Northern Chinese classics.</p>
+      <p class="story__p">Our kitchen's obsession is the wok's edge of fire: <em>griddle-cooked</em> dry pots seared over high flame, and <em>spicy boiled</em> dishes finished the Sichuan way — a ladle of hot oil poured over chili and Sichuan peppercorn at the last second, so the aroma blooms at your table.</p>
+      <div class="story__pillars">
+        <div>
+          <div class="story__pillar-cn">辣椒油</div>
+          <div class="story__pillar-en">House Chili Oil</div>
+          <div class="story__pillar-desc">Slow-infused daily with our own blend of chilies and spices.</div>
+        </div>
+        <div>
+          <div class="story__pillar-cn">干锅</div>
+          <div class="story__pillar-en">Griddle-Cooked</div>
+          <div class="story__pillar-desc">Dry pots seared to order — smoky, numbing, deeply savory.</div>
+        </div>
+        <div>
+          <div class="story__pillar-cn">水煮</div>
+          <div class="story__pillar-en">Spicy Boiled</div>
+          <div class="story__pillar-desc">Tender slices in roiling chili broth, crowned with sizzling oil.</div>
+        </div>
+      </div>
+    </div>
+    <div class="story__photo reveal" data-slot="chili oil being poured / wok fire"></div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- CATERING                                                      -->
+<!-- ============================================================= -->
+<section class="section" id="catering">
+  <div class="wrap catering__grid">
+    <div class="catering__photo reveal" data-slot="banquet spread"></div>
+    <div class="reveal">
+      <div class="eyebrow">宴席</div>
+      <h2 class="display">Catering &amp; Events</h2>
+      <p class="catering__p">From office lunches to wedding banquets, we bring the full Beijing House table to you — dry pots, dumplings, noodles, and trays of our most-loved classics, sized for ten guests or two hundred.</p>
+      <div class="catering__buttons">
+        <a class="btn btn--solid" data-link="tel" href="tel:813-513-882">Call <span data-bind="phone">813-513-882</span></a>
+        <a class="btn btn--outline" data-link="cateringEmail" href="mailto:catering@beijinghousefl.com">Email Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- HIRING                                                        -->
+<!-- ============================================================= -->
+<section class="hiring" id="careers">
+  <div class="wrap hiring__inner reveal">
+    <div>
+      <div class="eyebrow eyebrow--gold">招贤纳士</div>
+      <div class="hiring__title display display--light">Join the family — we're hiring</div>
+      <div class="hiring__sub">Servers, wok cooks, and front-of-house. Full and part time.</div>
+    </div>
+    <a class="btn btn--gold" data-link="jobsEmail" href="mailto:jobs@beijinghousefl.com">Apply Now</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================= -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================= -->
+<footer class="footer" id="visit">
+  <div class="wrap footer__grid">
+    <div>
+      <div class="footer__brand">
+        <span class="seal seal--sm seal--red" aria-hidden="true"><span>北</span><span>京</span><span>桃</span><span>园</span></span>
+        <span class="footer__brand-name">BEIJING HOUSE</span>
+      </div>
+      <div class="footer__meta">Authentic Beijing · Warm Humanity · Timeless Craft<br><span data-bind="hours">Open 7 Days a Week · 11AM–10PM</span></div>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-head">Visit</div>
+      <span data-bind="address">1441 E Fletcher Ave #107<br>Tampa, FL 33612</span><br>
+      <a data-link="tel" href="tel:813-513-882"><span data-bind="phone">813-513-882</span></a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-head">Follow</div>
+      <a data-link="instagram" href="https://instagram.com/beijinghousefl" target="_blank" rel="noopener">@beijinghousefl</a><br>
+      <a data-link="website" href="https://beijinghousefl.com" target="_blank" rel="noopener">beijinghousefl.com</a>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <div>© <span id="year">2026</span> Beijing House · Tampa, FL</div>
+    <div>Authentic Chinese Cuisine</div>
+  </div>
+</footer>
+
+<!-- Structured data for Google (rich results: name, address, hours, menu) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Beijing House",
+  "servesCuisine": ["Chinese", "Sichuan"],
+  "priceRange": "$$",
+  "telephone": "+1-813-513-882",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1441 E Fletcher Ave #107",
+    "addressLocality": "Tampa",
+    "addressRegion": "FL",
+    "postalCode": "33612",
+    "addressCountry": "US"
+  },
+  "url": "https://beijinghousefl.com",
+  "openingHours": "Mo-Su 11:00-22:00"
+}
+</script>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
