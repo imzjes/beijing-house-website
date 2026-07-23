@@ -1,0 +1,83 @@
+# Sveltia CMS configuration for Beijing House
+# Docs: https://github.com/sveltia/sveltia-cms
+
+backend:
+  name: github
+  repo: imzjes/beijing-house-website
+  branch: main
+  # GitHub login is handled by a free Cloudflare Worker (sveltia-cms-auth).
+  # After you deploy it, put its URL here, e.g. https://bh-cms-auth.<you>.workers.dev
+  base_url: https://REPLACE-WITH-YOUR-WORKER.workers.dev
+
+# Where uploaded images go by default. Individual fields override this
+# (menu PDF -> /assets/menu, hero video -> /assets/video).
+media_folder: assets/img
+public_folder: /assets/img
+
+# Nicer UI: links back to the live site
+display_url: https://imzjes.github.io/beijing-house-website/
+
+collections:
+  - name: site
+    label: Website Content
+    delete: false
+    files:
+      - name: general
+        label: Main Content
+        file: content/site.json
+        description: Edit the text, links, photos and menu shown on the site.
+        fields:
+          # ---- Top of page ----
+          - { name: tagline, label: Hero tagline, widget: string }
+
+          # ---- Menu PDF (the most-changed item) ----
+          - name: menu
+            label: Menu PDF
+            widget: file
+            media_folder: /assets/menu
+            public_folder: /assets/menu
+            hint: Upload a new PDF to update the "View Menu" buttons everywhere.
+
+          # ---- Contact ----
+          - { name: phone, label: Phone number, widget: string }
+          - { name: hours, label: Hours, widget: string }
+          - { name: address, label: Address, widget: text }
+
+          # ---- Ordering & delivery links ----
+          - { name: order, label: "Order button link (Chowbus pickup)", widget: string }
+          - { name: chowbus, label: Chowbus pickup URL, widget: string }
+          - { name: uber, label: Uber Eats URL, widget: string }
+          - { name: doordash, label: DoorDash URL, widget: string }
+          - { name: reserve, label: "Reserve link (tel: or booking URL)", widget: string, required: false }
+
+          # ---- Email & social ----
+          - { name: cateringEmail, label: "Catering email (mailto:)", widget: string, required: false }
+          - { name: jobsEmail, label: "Jobs email (mailto:)", widget: string, required: false }
+          - { name: instagram, label: Instagram URL, widget: string, required: false }
+          - { name: website, label: Website URL, widget: string, required: false }
+
+          # ---- Hero media ----
+          - name: hero_video
+            label: Hero background video (mp4)
+            widget: file
+            required: false
+            media_folder: /assets/video
+            public_folder: /assets/video
+            hint: Short, muted, compressed loop. Leave empty to show the poster image only.
+          - { name: hero_poster, label: Hero poster image, widget: image, required: false }
+
+          # ---- Section photos ----
+          - { name: story_photo, label: "Story photo (chili oil / wok fire)", widget: image, required: false }
+          - { name: catering_photo, label: Catering photo, widget: image, required: false }
+
+          # ---- Featured dishes ----
+          - name: dishes
+            label: Featured dishes
+            widget: list
+            max: 4
+            summary: "{{fields.en}}"
+            fields:
+              - { name: cn, label: Chinese name, widget: string }
+              - { name: en, label: English name, widget: string }
+              - { name: desc, label: Description, widget: text }
+              - { name: photo, label: Photo, widget: image, required: false }

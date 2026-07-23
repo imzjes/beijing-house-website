@@ -1,0 +1,26 @@
+{
+  "tagline": "Authentic Beijing · Warm Humanity · Timeless Craft",
+  "hours": "Open 7 Days a Week · 11AM–10PM",
+  "phone": "813-513-882",
+  "address": "1441 E Fletcher Ave #107\nTampa, FL 33612",
+  "menu": "assets/menu/menu.pdf",
+  "hero_video": "assets/video/hero.mp4",
+  "hero_poster": "assets/img/hero-poster.jpg",
+  "order": "https://pos.chowbus.com/online-ordering/store/beijing-house",
+  "chowbus": "https://pos.chowbus.com/online-ordering/store/beijing-house",
+  "uber": "https://www.ubereats.com/store/beijing-house-tampa",
+  "doordash": "https://www.doordash.com/store/beijing-house-tampa",
+  "reserve": "tel:813-513-882",
+  "cateringEmail": "mailto:catering@beijinghousefl.com",
+  "jobsEmail": "mailto:jobs@beijinghousefl.com",
+  "instagram": "https://instagram.com/beijinghousefl",
+  "website": "https://beijinghousefl.com",
+  "story_photo": "",
+  "catering_photo": "",
+  "dishes": [
+    { "cn": "麻辣香锅", "en": "Griddle-Cooked Spicy Pot", "desc": "Build-your-own dry pot, wok-seared with chili, peppercorn, and our house spice blend.", "photo": "" },
+    { "cn": "水煮鱼", "en": "Spicy Boiled Fish", "desc": "Silky fish fillets in roiling chili broth, finished with sizzling hot oil.", "photo": "" },
+    { "cn": "红油抄手", "en": "Chili Oil Wontons", "desc": "Hand-folded wontons bathed in our slow-infused house chili oil.", "photo": "" },
+    { "cn": "京味经典", "en": "Northern Classics", "desc": "Hand-pulled noodles, dumplings, and the comfort dishes of old Beijing.", "photo": "" }
+  ]
+}

@@ -60,8 +60,8 @@
 <section class="hero" id="top">
   <div class="hero__media">
     <!-- Drop a compressed loop at assets/video/hero.mp4 and a still at assets/img/hero-poster.jpg -->
-    <video class="hero__video" autoplay muted loop playsinline poster="assets/img/hero-poster.jpg">
-      <source src="assets/video/hero.mp4" type="video/mp4">
+    <video class="hero__video" id="heroVideo" autoplay muted loop playsinline poster="assets/img/hero-poster.jpg">
+      <source id="heroSource" src="assets/video/hero.mp4" type="video/mp4">
     </video>
     <div class="hero__scrim"></div>
   </div>
@@ -142,28 +142,28 @@
     </div>
     <div class="dish-grid">
 
-      <article class="dish reveal">
+      <article class="dish reveal" data-dish="0">
         <div class="dish__photo" data-slot="mala xiang guo"></div>
         <div class="dish__cn">麻辣香锅</div>
         <h3 class="dish__en">Griddle-Cooked Spicy Pot</h3>
         <p class="dish__desc">Build-your-own dry pot, wok-seared with chili, peppercorn, and our house spice blend.</p>
       </article>
 
-      <article class="dish reveal">
+      <article class="dish reveal" data-dish="1">
         <div class="dish__photo" data-slot="shui zhu yu"></div>
         <div class="dish__cn">水煮鱼</div>
         <h3 class="dish__en">Spicy Boiled Fish</h3>
         <p class="dish__desc">Silky fish fillets in roiling chili broth, finished with sizzling hot oil.</p>
       </article>
 
-      <article class="dish reveal">
+      <article class="dish reveal" data-dish="2">
         <div class="dish__photo" data-slot="chili oil wontons"></div>
         <div class="dish__cn">红油抄手</div>
         <h3 class="dish__en">Chili Oil Wontons</h3>
         <p class="dish__desc">Hand-folded wontons bathed in our slow-infused house chili oil.</p>
       </article>
 
-      <article class="dish reveal">
+      <article class="dish reveal" data-dish="3">
         <div class="dish__photo" data-slot="noodles / dumplings"></div>
         <div class="dish__cn">京味经典</div>
         <h3 class="dish__en">Northern Classics</h3>
@@ -202,7 +202,7 @@
         </div>
       </div>
     </div>
-    <div class="story__photo reveal" data-slot="chili oil being poured / wok fire"></div>
+    <div class="story__photo reveal" data-slot="chili oil being poured / wok fire" data-photo="story_photo"></div>
   </div>
 </section>
 
@@ -211,7 +211,7 @@
 <!-- ============================================================= -->
 <section class="section" id="catering">
   <div class="wrap catering__grid">
-    <div class="catering__photo reveal" data-slot="banquet spread"></div>
+    <div class="catering__photo reveal" data-slot="banquet spread" data-photo="catering_photo"></div>
     <div class="reveal">
       <div class="eyebrow">宴席</div>
       <h2 class="display">Catering &amp; Events</h2>
@@ -291,7 +291,6 @@
 }
 </script>
 
-<script src="js/config.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,38 +1,118 @@
 /* =============================================================
  *  BEIJING HOUSE — behavior
- *  - Injects config values into links & text
- *  - Sticky header on scroll past hero
- *  - Mobile menu toggle
- *  - Scroll-reveal animations (IntersectionObserver)
+ *  - Loads content/site.json (edited by the owner via /admin)
+ *    and applies it to the page. Falls back to DEFAULTS baked in
+ *    below, so the site NEVER breaks if the JSON is missing
+ *    (e.g. opened via file://) or malformed.
+ *  - Sticky header, mobile menu, scroll-reveal animations.
  *  Vanilla JS, no dependencies.
  * ============================================================= */
 (function () {
   "use strict";
 
-  var cfg = window.BH_CONFIG || {};
+  /* Fallback content — mirrors content/site.json. The CMS file wins
+     when it loads; this keeps the page populated otherwise. */
+  var DEFAULTS = {
+    tagline: "Authentic Beijing · Warm Humanity · Timeless Craft",
+    hours: "Open 7 Days a Week · 11AM–10PM",
+    phone: "813-513-882",
+    address: "1441 E Fletcher Ave #107\nTampa, FL 33612",
+    menu: "assets/menu/menu.pdf",
+    reserve: "tel:813-513-882",
+    tel: "tel:813-513-882",
+    order: "https://pos.chowbus.com/online-ordering/store/beijing-house",
+    chowbus: "https://pos.chowbus.com/online-ordering/store/beijing-house",
+    uber: "https://www.ubereats.com/store/beijing-house-tampa",
+    doordash: "https://www.doordash.com/store/beijing-house-tampa",
+    cateringEmail: "mailto:catering@beijinghousefl.com",
+    jobsEmail: "mailto:jobs@beijinghousefl.com",
+    instagram: "https://instagram.com/beijinghousefl",
+    website: "https://beijinghousefl.com"
+  };
 
-  /* ---- 1. Bind config to the DOM -------------------------------- */
-  // Links: <a data-link="uber"> → href from cfg.uber
-  document.querySelectorAll("[data-link]").forEach(function (el) {
-    var key = el.getAttribute("data-link");
-    if (cfg[key]) el.setAttribute("href", cfg[key]);
-  });
+  /* ---- utilities ---- */
+  function rel(p) { return (typeof p === "string" && p.charAt(0) === "/") ? p.slice(1) : p; }
+  function nl2br(s) { return String(s).replace(/\n/g, "<br>"); }
 
-  // Text: <span data-bind="phone"> → text/HTML from cfg.phone
-  document.querySelectorAll("[data-bind]").forEach(function (el) {
-    var key = el.getAttribute("data-bind");
-    if (cfg[key] != null) el.innerHTML = cfg[key];
-  });
+  function apply(c) {
+    try {
+      // reserve/tel default to a phone link built from the phone number
+      if (!c.tel) c.tel = "tel:" + (c.phone || "").replace(/[^0-9+]/g, "");
+      if (!c.reserve) c.reserve = c.tel;
 
-  // Current year in the footer
+      // Links: <a data-link="uber"> → href
+      document.querySelectorAll("[data-link]").forEach(function (el) {
+        var k = el.getAttribute("data-link");
+        if (c[k]) el.setAttribute("href", rel(c[k]));
+      });
+
+      // Text: <span data-bind="phone"> → text (newlines → <br>)
+      document.querySelectorAll("[data-bind]").forEach(function (el) {
+        var k = el.getAttribute("data-bind");
+        if (c[k] != null) el.innerHTML = nl2br(c[k]);
+      });
+
+      // Hero video + poster
+      if (c.hero_video) {
+        var src = document.getElementById("heroSource");
+        var vid = document.getElementById("heroVideo");
+        if (src && vid) { src.setAttribute("src", rel(c.hero_video)); vid.load(); }
+      }
+      if (c.hero_poster) {
+        var v = document.getElementById("heroVideo");
+        if (v) v.setAttribute("poster", rel(c.hero_poster));
+      }
+
+      // Section photos
+      setPhoto("story_photo", c.story_photo);
+      setPhoto("catering_photo", c.catering_photo);
+
+      // Dishes
+      if (Array.isArray(c.dishes)) {
+        c.dishes.forEach(function (d, i) {
+          var art = document.querySelector('[data-dish="' + i + '"]');
+          if (!art) return;
+          set(art, ".dish__cn", d.cn);
+          set(art, ".dish__en", d.en);
+          set(art, ".dish__desc", d.desc);
+          if (d.photo) fillPhoto(art.querySelector(".dish__photo"), d.photo);
+        });
+      }
+    } catch (e) { /* content is best-effort; never let it break the page */ }
+  }
+
+  function set(scope, sel, val) {
+    if (val == null) return;
+    var el = scope.querySelector(sel);
+    if (el) el.textContent = val;
+  }
+  function setPhoto(attr, url) {
+    if (!url) return;
+    fillPhoto(document.querySelector('[data-photo="' + attr + '"]'), url);
+  }
+  function fillPhoto(el, url) {
+    if (!el || !url) return;
+    el.style.backgroundImage = "url('" + rel(url) + "')";
+    el.classList.add("has-image");
+  }
+
+  /* Load CMS content, then apply (defaults applied first regardless). */
+  apply(DEFAULTS);
+  if (window.fetch) {
+    fetch("content/site.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (json) { if (json) apply(Object.assign({}, DEFAULTS, json)); })
+      .catch(function () { /* keep defaults */ });
+  }
+
+  /* ---- Current year ---- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---- 2. Sticky header appears after the hero ------------------ */
+  /* ---- Sticky header appears after the hero ---- */
   var header = document.getElementById("siteHeader");
   var hero = document.getElementById("top");
   var isNarrow = window.matchMedia("(max-width: 820px)");
-
   function onScroll() {
     if (!header) return;
     if (isNarrow.matches) { header.classList.add("is-visible"); return; }
@@ -42,7 +122,7 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---- 3. Mobile menu ------------------------------------------- */
+  /* ---- Mobile menu ---- */
   var toggle = document.getElementById("navToggle");
   var mobileNav = document.getElementById("mobileNav");
   function closeMenu() {
@@ -62,7 +142,7 @@
     });
   }
 
-  /* ---- 4. Scroll-reveal ----------------------------------------- */
+  /* ---- Scroll-reveal ---- */
   var reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && reveals.length) {
     var io = new IntersectionObserver(function (entries) {

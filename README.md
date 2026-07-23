@@ -10,11 +10,13 @@ python3 -m http.server 8000
 ```
 
 ## Edit content
-Everything you'd normally change lives in **`js/config.js`**: order links (Chowbus / Uber Eats / DoorDash), phone, hours, address, socials, and the menu PDF path. Edit, save, redeploy.
+**Owner (no code):** go to `/admin` on the live site, log in with GitHub, edit the form — text, links, hours, dish photos, and the **menu PDF** — then Publish. The site auto-redeploys in ~30s. Setup for this login is in [`docs/ADMIN-SETUP.md`](docs/ADMIN-SETUP.md).
 
-**Menu:** replace `assets/menu/menu.pdf` with the new file (keep the name).
+**By hand:** everything lives in **`content/site.json`** — order links (Chowbus / Uber Eats / DoorDash), phone, hours, address, socials, menu path, dishes, photos. Edit, save, redeploy.
+
+**Menu:** upload in `/admin`, or replace `assets/menu/menu.pdf` (keep the name).
 **Hero video:** add `assets/video/hero.mp4` (compressed, muted, 3–8 MB) and `assets/img/hero-poster.jpg`.
-**Photos:** see `assets/img/README.txt` and the "Adding a real photo" note in `CLAUDE.md`.
+**Photos:** upload in `/admin`, or see the "Adding a real photo" note in `CLAUDE.md`.
 
 ## Deploy to GitHub Pages
 1. Create a repo on GitHub and push this folder:
