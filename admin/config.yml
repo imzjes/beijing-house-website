@@ -5,9 +5,8 @@ backend:
   name: github
   repo: imzjes/beijing-house-website
   branch: main
-  # GitHub login is handled by a free Cloudflare Worker (sveltia-cms-auth).
-  # After you deploy it, put its URL here, e.g. https://bh-cms-auth.<you>.workers.dev
-  base_url: https://REPLACE-WITH-YOUR-WORKER.workers.dev
+  # GitHub login handled by our Cloudflare Worker (sveltia-cms-auth).
+  base_url: https://beijing-house-cms-auth.imalabekov.workers.dev
 
 # Where uploaded images go by default. Individual fields override this
 # (menu PDF -> /assets/menu, hero video -> /assets/video).

@@ -1,0 +1,12 @@
+name = "beijing-house-cms-auth"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+
+# Non-secret var: which site host(s) may use this login worker.
+# GitHub Pages host now; add the custom domain here later (comma-separated).
+[vars]
+ALLOWED_DOMAINS = "imzjes.github.io"
+
+# GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET are set as secrets via:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
