@@ -13,7 +13,6 @@
   /* Fallback content — mirrors content/site.json. The CMS file wins
      when it loads; this keeps the page populated otherwise. */
   var DEFAULTS = {
-    tagline: "Authentic Beijing · Warm Humanity · Timeless Craft",
     hours: "Open 7 Days a Week · 11AM–10PM",
     phone: "813-513-882",
     address: "1441 E Fletcher Ave #107\nTampa, FL 33612",
@@ -61,6 +60,17 @@
       if (c.hero_poster) {
         var v = document.getElementById("heroVideo");
         if (v) v.setAttribute("poster", rel(c.hero_poster));
+      }
+
+      // Directions link + map embed, derived from the address
+      if (c.address) {
+        var q = String(c.address).replace(/\n/g, ", ").trim();
+        var dirEl = document.querySelector('[data-link="directions"]');
+        if (dirEl) dirEl.setAttribute("href",
+          "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(q));
+        var map = document.querySelector("[data-map]");
+        if (map) map.setAttribute("src",
+          "https://www.google.com/maps?q=" + encodeURIComponent(q) + "&output=embed");
       }
 
       // Section photos

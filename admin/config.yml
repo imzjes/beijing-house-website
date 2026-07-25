@@ -26,9 +26,6 @@ collections:
         file: content/site.json
         description: Edit the text, links, photos and menu shown on the site.
         fields:
-          # ---- Top of page ----
-          - { name: tagline, label: Hero tagline, widget: string }
-
           # ---- Menu PDF (the most-changed item) ----
           - name: menu
             label: Menu PDF

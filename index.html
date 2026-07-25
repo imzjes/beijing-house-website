@@ -85,10 +85,9 @@
 
   <!-- Bottom actions -->
   <div class="hero__actions reveal-hero">
-    <p class="hero__tagline" data-bind="tagline">Authentic Beijing · Warm Humanity · Timeless Craft</p>
     <div class="hero__buttons">
       <a class="btn btn--solid btn--lg" data-link="order" href="#order" target="_blank" rel="noopener">Order</a>
-      <a class="btn btn--cream btn--lg" data-link="menu" href="assets/menu/menu.pdf" target="_blank" rel="noopener">View Menu (PDF)</a>
+      <a class="btn btn--cream btn--lg" data-link="menu" href="assets/menu/menu.pdf" target="_blank" rel="noopener">View Menu</a>
     </div>
     <a href="#order" class="hero__scroll" aria-label="Scroll down">
       <span></span>
@@ -110,7 +109,7 @@
         <div class="order-card__tag order-card__tag--gold">Pickup · Best Value</div>
         <div class="order-card__title display">Order directly from us</div>
         <p class="order-card__body">Skip the third-party fees. Order through our own system and your food is ready when you arrive.</p>
-        <a class="btn btn--cream" data-link="chowbus" href="#" target="_blank" rel="noopener">Order on Chowbus →</a>
+        <a class="btn btn--cream" data-link="chowbus" href="#" target="_blank" rel="noopener">Order Pickup →</a>
       </div>
       <div class="order-card reveal">
         <div class="order-card__tag">Delivery</div>
@@ -138,7 +137,7 @@
         <div class="eyebrow">菜单</div>
         <h2 class="display">Signatures of the House</h2>
       </div>
-      <a class="btn btn--outline" data-link="menu" href="assets/menu/menu.pdf" target="_blank" rel="noopener">Full Menu (PDF) ↓</a>
+      <a class="btn btn--outline" data-link="menu" href="assets/menu/menu.pdf" target="_blank" rel="noopener">Full Menu ↓</a>
     </div>
     <div class="dish-grid">
 
@@ -238,12 +237,48 @@
   </div>
 </section>
 
+<!-- ============================================================= -->
+<!-- VISIT / FIND US                                               -->
+<!-- ============================================================= -->
+<section class="section visit" id="visit">
+  <div class="wrap">
+    <div class="section__head section__head--center reveal">
+      <div class="eyebrow">到店</div>
+      <h2 class="display">Find Us</h2>
+    </div>
+    <div class="visit__grid">
+      <div class="visit__info reveal">
+        <div class="visit__item">
+          <div class="visit__label">Address</div>
+          <div class="visit__value" data-bind="address">1441 E Fletcher Ave #107<br>Tampa, FL 33612</div>
+          <a class="btn btn--outline btn--sm" data-link="directions" href="#" target="_blank" rel="noopener">Get Directions →</a>
+        </div>
+        <div class="visit__item">
+          <div class="visit__label">Hours</div>
+          <div class="visit__value" data-bind="hours">Open 7 Days a Week · 11AM–10PM</div>
+        </div>
+        <div class="visit__item">
+          <div class="visit__label">Phone</div>
+          <div class="visit__value"><a data-link="tel" href="tel:813-513-882"><span data-bind="phone">813-513-882</span></a></div>
+        </div>
+      </div>
+      <div class="visit__map reveal">
+        <iframe
+          title="Beijing House location map"
+          data-map="1441 E Fletcher Ave #107, Tampa, FL 33612"
+          src="https://www.google.com/maps?q=1441%20E%20Fletcher%20Ave%20%23107,%20Tampa,%20FL%2033612&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ============================================================= -->
 <!-- FOOTER                                                        -->
 <!-- ============================================================= -->
-<footer class="footer" id="visit">
+<footer class="footer">
   <div class="wrap footer__grid">
     <div>
       <div class="footer__brand">
