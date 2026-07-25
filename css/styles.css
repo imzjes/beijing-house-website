@@ -79,6 +79,12 @@ img { max-width: 100%; display: block; }
 .seal--sm { width: 36px; height: 36px; font-size: 11px; padding: 4px; border-width: 1.5px; background: none; }
 .seal--red { border-color: var(--red); color: var(--red); }
 
+/* ---- Real seal logo ---- */
+.brand-logo { display: block; width: auto; height: 40px; }
+.brand-logo--hero { height: 60px; }
+.site-header__brand .brand-logo { height: 34px; }
+.footer__brand .brand-logo { height: 46px; }
+
 /* ============================================================= */
 /*  Buttons                                                       */
 /* ============================================================= */

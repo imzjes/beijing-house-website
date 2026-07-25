@@ -14,11 +14,11 @@
      when it loads; this keeps the page populated otherwise. */
   var DEFAULTS = {
     hours: "Open 7 Days a Week · 11AM–10PM",
-    phone: "813-513-882",
+    phone: "(813) 513-8882",
     address: "1441 E Fletcher Ave #107\nTampa, FL 33612",
     menu: "assets/menu/menu.pdf",
-    reserve: "tel:813-513-882",
-    tel: "tel:813-513-882",
+    reserve: "tel:8135138882",
+    tel: "tel:8135138882",
     order: "https://pos.chowbus.com/online-ordering/store/Beijing-House/23442",
     chowbus: "https://pos.chowbus.com/online-ordering/store/Beijing-House/23442",
     uber: "https://www.ubereats.com/store/beijing-house-fletcher/yVsfecdCVi-kCivED9jIug",
