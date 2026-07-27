@@ -18,6 +18,7 @@
   /* Sole chromatic accent — Beijing House red (the "saffron" role) */
   --accent:      #A82724;
   --accent-deep: #8C1D1B;
+  --gold:        #C2A24E;   /* antique gold — used only in accents (e.g. the order-card hover border) */
 
   /* Type */
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -227,15 +228,29 @@ p { margin: 0 0 1.1em; }
 .section__head--center { text-align: center; }
 
 /* ---- Order ---- */
-.order-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 0; border: 1px solid var(--stone); }
+@property --bh-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.order-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
 .order-card {
+  position: relative;
   padding: 40px 34px; display: flex; flex-direction: column; gap: 14px;
-  border-right: 1px solid var(--stone);
-  transition: background .4s var(--ease);
+  border: 2.5px solid transparent; border-radius: 4px;
+  background:
+    linear-gradient(var(--parchment), var(--parchment)) padding-box,
+    linear-gradient(var(--stone), var(--stone)) border-box;
+  transition: box-shadow .35s var(--ease);
 }
-.order-card:last-child { border-right: none; }
-.order-card:hover { background: var(--linen); }
-.order-card--feature { background: var(--linen); border-top: 3px solid var(--accent); }
+/* Hover: the border becomes a rotating red↔gold gradient + a soft glow (adapted Uiverse card) */
+.order-card:hover {
+  background:
+    linear-gradient(var(--parchment), var(--parchment)) padding-box,
+    conic-gradient(from var(--bh-angle), var(--accent), var(--gold) 25%, var(--accent) 50%, var(--gold) 75%, var(--accent)) border-box;
+  box-shadow: 0 14px 36px rgba(42,33,28,0.16), 0 0 24px rgba(168,39,36,0.16);
+  animation: bh-spin 5s linear infinite;
+}
+@keyframes bh-spin { to { --bh-angle: 360deg; } }
+/* Pickup button reads red at rest so it stands out from the delivery buttons */
+.order-card--feature .order-btn { border-color: var(--accent); color: var(--accent); }
+.order-card--feature .order-btn .order-btn__arr { fill: var(--accent); }
 .order-card__seal { align-self: flex-start; height: 34px; width: auto; margin-bottom: -2px; }
 .order-card__brand { align-self: flex-start; height: 32px; width: auto; margin-bottom: -2px; opacity: 0.9; }
 .order-card__tag { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; color: var(--walnut); text-transform: uppercase; }
@@ -446,7 +461,7 @@ p { margin: 0 0 1.1em; }
     opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important;
   }
   .reveal-hero { opacity: 1; animation: none; }
-  .marquee__track, .hero__video { animation: none; }
+  .marquee__track, .hero__video, .order-card:hover { animation: none; }
 }
 
 /* ============================================================= */
@@ -454,8 +469,6 @@ p { margin: 0 0 1.1em; }
 /* ============================================================= */
 @media (max-width: 1024px) {
   .order-grid { grid-template-columns: 1fr 1fr; }
-  .order-card { border-bottom: 1px solid var(--stone); }
-  .order-card:nth-child(2) { border-right: none; }
   .order-card--feature { grid-column: 1 / -1; }
   .dish-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -493,7 +506,6 @@ p { margin: 0 0 1.1em; }
 
 @media (max-width: 560px) {
   .order-grid { grid-template-columns: 1fr; }
-  .order-card { border-right: none; }
   .dish-grid { grid-template-columns: 1fr; }
   .hero__buttons { flex-direction: row; flex-wrap: nowrap; width: 100%; gap: 12px; }
   .hero__buttons .btn { flex: 1 1 0; text-align: center; padding-left: 14px; padding-right: 14px; }
