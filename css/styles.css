@@ -140,7 +140,7 @@ p { margin: 0 0 1.1em; }
   background: var(--accent); transform: scaleX(0); transform-origin: left;
   transition: transform .4s var(--ease);
 }
-.site-header__nav a:not(.btn):hover { color: var(--ink); }
+.site-header__nav a:not(.btn):hover { color: var(--accent); }
 .site-header__nav a:not(.btn):hover::after { transform: scaleX(1); }
 
 /* Hamburger */
@@ -191,7 +191,7 @@ p { margin: 0 0 1.1em; }
   content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
   background: var(--parchment); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease);
 }
-.hero__nav a:hover { color: var(--parchment); }
+.hero__nav a:hover { color: var(--accent); }
 .hero__nav a:hover::after { transform: scaleX(1); }
 
 .hero__brand { display: flex; flex-direction: column; align-items: center; gap: 14px; color: var(--parchment); }
