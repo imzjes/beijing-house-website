@@ -193,6 +193,7 @@ p { margin: 0 0 1.1em; }
 .hero__nav a:hover::after { transform: scaleX(1); }
 
 .hero__brand { display: flex; flex-direction: column; align-items: center; gap: 14px; color: var(--parchment); }
+.hero__brand-row { display: flex; align-items: center; gap: 18px; }
 .hero__brand-name {
   font-family: var(--serif); font-weight: 300; font-size: clamp(2.25rem, 5vw, 3.75rem);
   letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
