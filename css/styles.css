@@ -231,8 +231,8 @@ p { margin: 0 0 1.1em; }
 .order-card:last-child { border-right: none; }
 .order-card:hover { background: var(--linen); }
 .order-card--feature { background: var(--linen); border-top: 3px solid var(--accent); }
-.order-card__seal { align-self: flex-start; height: 46px; width: auto; margin-bottom: -2px; }
-.order-card__brand { align-self: flex-start; height: 30px; width: auto; margin-bottom: -2px; opacity: 0.9; }
+.order-card__seal { align-self: flex-start; height: 34px; width: auto; margin-bottom: -2px; }
+.order-card__brand { align-self: flex-start; height: 32px; width: auto; margin-bottom: -2px; opacity: 0.9; }
 .order-card__tag { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; color: var(--walnut); text-transform: uppercase; }
 .order-card__tag--gold { color: var(--accent); }
 .order-card__title { font-family: var(--serif); font-weight: 400; font-size: 1.9rem; line-height: 1.05; letter-spacing: -0.01em; text-transform: none; }
