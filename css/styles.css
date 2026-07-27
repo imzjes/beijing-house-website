@@ -212,13 +212,6 @@ p { margin: 0 0 1.1em; }
 .hero__buttons .btn { border-color: rgba(235,221,196,0.55); color: var(--parchment); }
 .hero__buttons .btn:hover { background: var(--parchment); color: var(--ink); border-color: var(--parchment); }
 
-.hero__scroll { width: 26px; height: 42px; border: 1px solid rgba(235,221,196,0.5); border-radius: 14px; position: relative; margin-top: 2px; }
-.hero__scroll span {
-  position: absolute; top: 8px; left: 50%; width: 3px; height: 8px; margin-left: -1.5px;
-  background: var(--parchment); border-radius: 2px; animation: scrollDot 2s var(--ease) infinite;
-}
-@keyframes scrollDot { 0%{opacity:0;transform:translateY(0)} 40%{opacity:1} 80%,100%{opacity:0;transform:translateY(14px)} }
-
 /* ============================================================= */
 /*  Sections                                                      */
 /* ============================================================= */
@@ -385,7 +378,7 @@ p { margin: 0 0 1.1em; }
     opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important;
   }
   .reveal-hero { opacity: 1; animation: none; }
-  .marquee__track, .hero__scroll span, .hero__video { animation: none; }
+  .marquee__track, .hero__video { animation: none; }
 }
 
 /* ============================================================= */
