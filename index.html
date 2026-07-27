@@ -6,6 +6,8 @@
   <title>Beijing House · Authentic Chinese Restaurant · Tampa, FL</title>
   <meta name="description" content="Beijing House — authentic Sichuan &amp; Northern Chinese cuisine in Tampa Bay. Order pickup on Chowbus, or delivery via Uber Eats and DoorDash. Griddle-cooked dry pots, spicy boiled fish, hand-folded wontons.">
   <meta name="theme-color" content="#EBDDC4">
+  <!-- Flag JS before first paint so reveal elements can hide without a flash -->
+  <script>document.documentElement.classList.add('has-js');</script>
   <link rel="icon" type="image/png" href="assets/img/logo.png">
   <link rel="apple-touch-icon" href="assets/img/logo.png">
 
@@ -104,24 +106,24 @@
 <!-- ============================================================= -->
 <section class="section" id="order">
   <div class="wrap">
-    <div class="section__head reveal">
+    <div class="section__head reveal a-head">
       <div class="eyebrow">外卖 · 自取</div>
       <h2 class="display">Order Tonight</h2>
     </div>
     <div class="order-grid">
-      <div class="order-card order-card--feature reveal">
+      <div class="order-card order-card--feature reveal a-rise">
         <div class="order-card__tag order-card__tag--gold">Pickup · Best Value</div>
         <div class="order-card__title display">Order directly from us</div>
         <p class="order-card__body">Skip the third-party fees. Order through our own system and your food is ready when you arrive.</p>
         <a class="btn btn--cream" data-link="chowbus" href="#" target="_blank" rel="noopener">Order Pickup →</a>
       </div>
-      <div class="order-card reveal">
+      <div class="order-card reveal a-rise">
         <div class="order-card__tag">Delivery</div>
         <div class="order-card__title display">Uber Eats</div>
         <p class="order-card__body">Hot delivery across Tampa Bay.</p>
         <a class="btn btn--outline" data-link="uber" href="#" target="_blank" rel="noopener">Order Delivery →</a>
       </div>
-      <div class="order-card reveal">
+      <div class="order-card reveal a-rise">
         <div class="order-card__tag">Delivery</div>
         <div class="order-card__title display">DoorDash</div>
         <p class="order-card__body">Hot delivery across Tampa Bay.</p>
@@ -152,7 +154,7 @@
 <!-- ============================================================= -->
 <section class="section" id="menu">
   <div class="wrap">
-    <div class="section__head reveal">
+    <div class="section__head reveal a-head">
       <div>
         <div class="eyebrow">菜单</div>
         <h2 class="display">Signatures of the House</h2>
@@ -161,28 +163,28 @@
     </div>
     <div class="dish-grid">
 
-      <article class="dish reveal" data-dish="0">
+      <article class="dish reveal a-rise" data-dish="0">
         <div class="dish__photo" data-slot="mala xiang guo"></div>
         <div class="dish__cn">麻辣香锅</div>
         <h3 class="dish__en">Griddle-Cooked Spicy Pot</h3>
         <p class="dish__desc">Build-your-own dry pot, wok-seared with chili, peppercorn, and our house spice blend.</p>
       </article>
 
-      <article class="dish reveal" data-dish="1">
+      <article class="dish reveal a-rise" data-dish="1">
         <div class="dish__photo" data-slot="shui zhu yu"></div>
         <div class="dish__cn">水煮鱼</div>
         <h3 class="dish__en">Spicy Boiled Fish</h3>
         <p class="dish__desc">Silky fish fillets in roiling chili broth, finished with sizzling hot oil.</p>
       </article>
 
-      <article class="dish reveal" data-dish="2">
+      <article class="dish reveal a-rise" data-dish="2">
         <div class="dish__photo" data-slot="chili oil wontons"></div>
         <div class="dish__cn">红油抄手</div>
         <h3 class="dish__en">Chili Oil Wontons</h3>
         <p class="dish__desc">Hand-folded wontons bathed in our slow-infused house chili oil.</p>
       </article>
 
-      <article class="dish reveal" data-dish="3">
+      <article class="dish reveal a-rise" data-dish="3">
         <div class="dish__photo" data-slot="noodles / dumplings"></div>
         <div class="dish__cn">京味经典</div>
         <h3 class="dish__en">Northern Classics</h3>
@@ -198,7 +200,7 @@
 <!-- ============================================================= -->
 <section class="story" id="story">
   <div class="wrap story__grid">
-    <div class="reveal">
+    <div class="reveal a-rise">
       <div class="eyebrow eyebrow--gold">我们的故事</div>
       <h2 class="display display--light">A Taste of Home —<br>From Our Family to Yours</h2>
       <p class="story__p">Beijing House is a family-owned restaurant built on a simple mission — to bring the most authentic Chinese flavors to the heart of Tampa Bay. Since 2017, we've served dishes that honor our heritage, blending the bold heat of Sichuan cuisine with the rich comfort of Northern Chinese classics.</p>
@@ -221,7 +223,7 @@
         </div>
       </div>
     </div>
-    <div class="story__photo reveal" data-slot="chili oil being poured / wok fire" data-photo="story_photo"></div>
+    <div class="story__photo reveal a-img" data-slot="chili oil being poured / wok fire" data-photo="story_photo"></div>
   </div>
 </section>
 
@@ -230,8 +232,8 @@
 <!-- ============================================================= -->
 <section class="section" id="catering">
   <div class="wrap catering__grid">
-    <div class="catering__photo reveal" data-slot="banquet spread" data-photo="catering_photo"></div>
-    <div class="reveal">
+    <div class="catering__photo reveal a-img" data-slot="banquet spread" data-photo="catering_photo"></div>
+    <div class="reveal a-rise">
       <div class="eyebrow">宴席</div>
       <h2 class="display">Catering &amp; Events</h2>
       <p class="catering__p">From office lunches to wedding banquets, we bring the full Beijing House table to you — dry pots, dumplings, noodles, and trays of our most-loved classics, sized for ten guests or two hundred.</p>
@@ -247,7 +249,7 @@
 <!-- HIRING                                                        -->
 <!-- ============================================================= -->
 <section class="hiring" id="careers">
-  <div class="wrap hiring__inner reveal">
+  <div class="wrap hiring__inner reveal a-rise">
     <div>
       <div class="eyebrow eyebrow--gold">招贤纳士</div>
       <div class="hiring__title display display--light">Join the family — we're hiring</div>
@@ -262,12 +264,12 @@
 <!-- ============================================================= -->
 <section class="section visit" id="visit">
   <div class="wrap">
-    <div class="section__head reveal">
+    <div class="section__head reveal a-head">
       <div class="eyebrow">到店</div>
       <h2 class="display">Find Us</h2>
     </div>
     <div class="visit__grid">
-      <div class="visit__info reveal">
+      <div class="visit__info reveal a-rise">
         <div class="visit__item">
           <div class="visit__label">Address</div>
           <div class="visit__value" data-bind="address">1441 E Fletcher Ave #107<br>Tampa, FL 33612</div>
@@ -282,7 +284,7 @@
           <div class="visit__value"><a data-link="tel" href="tel:8135138882"><span data-bind="phone">(813) 513-8882</span></a></div>
         </div>
       </div>
-      <div class="visit__map reveal">
+      <div class="visit__map reveal a-rise">
         <iframe
           title="Beijing House location map"
           data-map="1441 E Fletcher Ave #107, Tampa, FL 33612"

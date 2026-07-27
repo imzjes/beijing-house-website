@@ -152,9 +152,23 @@
     });
   }
 
-  /* ---- Scroll-reveal ---- */
-  var reveals = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && reveals.length) {
+  /* ---- Scroll-reveal ----
+     Effect classes (a-rise / a-head / a-img) are set in the HTML and hidden
+     via `.has-js` before first paint. Here we just stagger grid cards and add
+     `is-in` when each element scrolls into view. Degrades to fully-visible if
+     JS never runs; honors prefers-reduced-motion. */
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Stagger cards within the order and menu grids
+  document.querySelectorAll(".order-grid > .a-rise, .dish-grid > .a-rise").forEach(function (el) {
+    var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+    el.style.transitionDelay = (i * 0.08).toFixed(2) + "s";
+  });
+
+  var animated = document.querySelectorAll(".a-rise, .a-head, .a-img");
+  if (reduce || !("IntersectionObserver" in window)) {
+    animated.forEach(function (el) { el.classList.add("is-in"); });
+  } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -162,9 +176,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    reveals.forEach(function (el) { io.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add("is-in"); });
+    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+    animated.forEach(function (el) { io.observe(el); });
   }
 })();
