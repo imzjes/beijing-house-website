@@ -26,6 +26,8 @@
     cateringEmail: "mailto:catering@beijinghousefl.com",
     jobsEmail: "mailto:jobs@beijinghousefl.com",
     instagram: "https://instagram.com/beijinghousefl",
+    facebook: "https://facebook.com/beijinghousefl",
+    tiktok: "https://www.tiktok.com/@beijinghousefl",
     website: "https://beijinghousefl.com"
   };
 

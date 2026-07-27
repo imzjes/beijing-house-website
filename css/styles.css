@@ -347,6 +347,37 @@ p { margin: 0 0 1.1em; }
 .footer__col a { color: rgba(235,221,196,0.85); }
 .footer__col a:hover { color: var(--accent); }
 .footer__col-head { font-weight: 500; letter-spacing: 0.16em; font-size: 11px; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; }
+
+/* Social icons — flat hairline circles; fill the platform brand color +
+   float a matching tooltip on hover (adapted from a Uiverse component). */
+.socials { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; padding: 0; margin: 8px 0 0; }
+.socials .soc a {
+  position: relative; display: grid; place-items: center; width: 42px; height: 42px;
+  border-radius: 50%; border: 1px solid rgba(199,184,150,0.30); color: rgba(235,221,196,0.72);
+  transition: transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.socials .soc a:hover {
+  transform: translateY(-4px); background: var(--brand); color: #fff; border-color: var(--brand);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+.soc__icon {
+  width: 18px; height: 18px; background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat;
+}
+.soc__tip {
+  position: absolute; top: -6px; left: 50%; transform: translate(-50%, 0) scale(0.9);
+  padding: 4px 9px; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: 0.02em;
+  white-space: nowrap; background: var(--brand); color: #fff;
+  opacity: 0; pointer-events: none; transition: opacity .3s var(--ease), top .3s var(--ease), transform .3s var(--ease);
+}
+.soc__tip::after { content: ""; position: absolute; bottom: -3px; left: 50%; width: 7px; height: 7px; background: var(--brand); transform: translateX(-50%) rotate(45deg); }
+.socials .soc a:hover .soc__tip { opacity: 1; top: -36px; transform: translate(-50%, 0) scale(1); }
+.soc--instagram { --icon: url('../assets/img/social/instagram.svg'); --brand: #E4405F; }
+.soc--facebook  { --icon: url('../assets/img/social/facebook.svg');  --brand: #1877F2; }
+.soc--tiktok    { --icon: url('../assets/img/social/tiktok.svg');    --brand: #FE2C55; }
+.soc--rednote   { --icon: url('../assets/img/social/rednote.svg');   --brand: #FF2442; }
+.soc--wechat    { --icon: url('../assets/img/social/wechat.svg');    --brand: #07C160; }
+
 .footer__bottom {
   padding-bottom: 30px; padding-top: 22px; display: flex; justify-content: space-between;
   font-size: 12px; color: rgba(235,221,196,0.42);
