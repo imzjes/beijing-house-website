@@ -179,4 +179,37 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
     animated.forEach(function (el) { io.observe(el); });
   }
+
+  /* ---- Parallax: hero footage drifts, feature/dish photos pan in their frames.
+     Uses transform (hero) and background-position (photos) so it never fights the
+     reveal transitions. Disabled for reduced-motion; hero drift off on mobile. */
+  if (!reduce) {
+    var heroV = document.getElementById("heroVideo");
+    var pxPhotos = Array.prototype.slice.call(
+      document.querySelectorAll(".story__photo, .catering__photo, .dish__photo"));
+    var wide = window.matchMedia("(min-width: 821px)");
+    var pTick = false;
+    function parallax() {
+      var vh = window.innerHeight || 800;
+      if (heroV) {
+        if (wide.matches) {
+          var y = window.pageYOffset;
+          if (y < vh * 1.15) heroV.style.transform = "translate3d(0," + (y * 0.12).toFixed(1) + "px,0)";
+        } else {
+          heroV.style.transform = "";
+        }
+      }
+      for (var i = 0; i < pxPhotos.length; i++) {
+        var el = pxPhotos[i], r = el.getBoundingClientRect();
+        if (r.bottom < -80 || r.top > vh + 80) continue;
+        var prog = (r.top + r.height / 2 - vh / 2) / (vh + r.height); // ~ -0.5..0.5
+        el.style.backgroundPositionY = (50 - prog * 24).toFixed(1) + "%";
+      }
+      pTick = false;
+    }
+    var onParallax = function () { if (!pTick) { requestAnimationFrame(parallax); pTick = true; } };
+    window.addEventListener("scroll", onParallax, { passive: true });
+    window.addEventListener("resize", onParallax, { passive: true });
+    parallax();
+  }
 })();

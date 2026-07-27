@@ -44,7 +44,7 @@ the HTML and hidden **before first paint** via a `has-js` flag (inline `<script>
 - `a-rise` — fade + rise (content blocks/cards; grid children stagger via JS `transitionDelay`)
 - `a-head` — section heading **wipes up** (clip-path) while its eyebrow rises
 - `a-img` — big feature photos **curtain-reveal** (`.story__photo`, `.catering__photo`)
-`js/main.js` adds `is-in` on IntersectionObserver. Plus: slow hero video zoom, animated gold nav underlines, and the horizontal **dish marquee** (`.marquee`, the one kinetic element). All disabled under `prefers-reduced-motion`; degrades to fully-visible without JS.
+`js/main.js` adds `is-in` on IntersectionObserver. Plus a **parallax engine** (rAF, in `main.js`): the hero footage drifts on scroll via `transform` (video is oversized `top:-15%;height:130%` so the drift never shows edges; desktop only), and feature/dish photos **pan in their frames** via `background-position-y` (frames are `background-size:100% 132%` so there's room; real photos use `cover` from `.has-image`). Using transform for the hero and background-position for photos keeps parallax from fighting the reveal transitions. Also: animated gold nav underlines and the horizontal **dish marquee** (`.marquee`). All disabled under `prefers-reduced-motion`; degrades to fully-visible without JS.
 
 ## How content binding works
 - `content/site.json` is the source of truth. `js/main.js` fetches it and applies it to the DOM; if the fetch fails (e.g. `file://`), the baked-in `DEFAULTS` object keeps the page populated.
