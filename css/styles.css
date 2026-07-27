@@ -244,6 +244,31 @@ p { margin: 0 0 1.1em; }
 .order-card__body { font-size: 14px; line-height: 1.55; color: var(--espresso); flex: 1; margin: 0; }
 .order-card .btn { align-self: flex-start; margin-top: 8px; }
 
+/* Animated order buttons (adapted from a Uiverse component; brand red, sharp) */
+.order-btn {
+  position: relative; align-self: flex-start; margin-top: 8px;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 14px 34px; border: 1.5px solid var(--accent); border-radius: 3px;
+  font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase;
+  color: var(--accent); background: transparent; cursor: pointer; overflow: hidden;
+  transition: color .6s cubic-bezier(.23,1,.32,1), border-radius .6s cubic-bezier(.23,1,.32,1);
+}
+.order-btn__arr { position: absolute; width: 20px; height: 20px; fill: var(--accent); z-index: 9; transition: all .8s cubic-bezier(.23,1,.32,1); }
+.order-btn__arr--1 { right: 16px; }
+.order-btn__arr--2 { left: -25%; }
+.order-btn__circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; background: var(--accent); border-radius: 50%; opacity: 0; transition: all .8s cubic-bezier(.23,1,.32,1); }
+.order-btn__text { position: relative; z-index: 1; transform: translateX(-12px); transition: transform .8s cubic-bezier(.23,1,.32,1); }
+.order-btn:hover { color: var(--parchment); border-radius: 6px; }
+.order-btn:hover .order-btn__arr--1 { right: -25%; }
+.order-btn:hover .order-btn__arr--2 { left: 16px; }
+.order-btn:hover .order-btn__text { transform: translateX(12px); }
+.order-btn:hover .order-btn__arr { fill: var(--parchment); }
+.order-btn:hover .order-btn__circle { width: 340px; height: 340px; opacity: 1; }
+.order-btn:active { scale: 0.97; }
+@media (prefers-reduced-motion: reduce) {
+  .order-btn, .order-btn__arr, .order-btn__circle, .order-btn__text { transition-duration: .01ms; }
+}
+
 /* ---- Marquee ---- */
 .marquee { overflow: hidden; padding: 24px 0; background: var(--parchment); border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone); }
 .marquee__track { display: inline-block; white-space: nowrap; animation: marquee 36s linear infinite; will-change: transform; }
