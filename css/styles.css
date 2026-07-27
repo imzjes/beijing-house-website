@@ -248,17 +248,17 @@ p { margin: 0 0 1.1em; }
 .order-btn {
   position: relative; align-self: flex-start; margin-top: 8px;
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 14px 34px; border: 1.5px solid var(--accent); border-radius: 3px;
+  padding: 14px 34px; border: 1.5px solid var(--ink); border-radius: 3px;
   font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase;
-  color: var(--accent); background: transparent; cursor: pointer; overflow: hidden;
-  transition: color .6s cubic-bezier(.23,1,.32,1), border-radius .6s cubic-bezier(.23,1,.32,1);
+  color: var(--ink); background: transparent; cursor: pointer; overflow: hidden;
+  transition: color .6s cubic-bezier(.23,1,.32,1), border-color .6s cubic-bezier(.23,1,.32,1), border-radius .6s cubic-bezier(.23,1,.32,1);
 }
-.order-btn__arr { position: absolute; width: 20px; height: 20px; fill: var(--accent); z-index: 9; transition: all .8s cubic-bezier(.23,1,.32,1); }
+.order-btn__arr { position: absolute; width: 20px; height: 20px; fill: var(--ink); z-index: 9; transition: all .8s cubic-bezier(.23,1,.32,1); }
 .order-btn__arr--1 { right: 16px; }
 .order-btn__arr--2 { left: -25%; }
 .order-btn__circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; background: var(--accent); border-radius: 50%; opacity: 0; transition: all .8s cubic-bezier(.23,1,.32,1); }
 .order-btn__text { position: relative; z-index: 1; transform: translateX(-12px); transition: transform .8s cubic-bezier(.23,1,.32,1); }
-.order-btn:hover { color: var(--parchment); border-radius: 6px; }
+.order-btn:hover { color: var(--parchment); border-color: var(--accent); border-radius: 6px; }
 .order-btn:hover .order-btn__arr--1 { right: -25%; }
 .order-btn:hover .order-btn__arr--2 { left: 16px; }
 .order-btn:hover .order-btn__text { transform: translateX(12px); }
