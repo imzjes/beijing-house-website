@@ -24,10 +24,10 @@
   --sc:    'Noto Serif SC', serif;
   --sans:  'Inter', system-ui, sans-serif;
 
-  --maxw: 1320px;
-  --maxw-text: 40rem;
+  --maxw: 2160px;              /* wide, near full-bleed; fills large screens, caps ultra-wide */
+  --maxw-text: 40rem;          /* prose stays readable (~66ch) regardless of container width */
   --section-y: clamp(5.5rem, 11vw, 9.5rem);
-  --gutter: clamp(1.5rem, 5vw, 4rem);
+  --gutter: clamp(1.5rem, 5vw, 6rem);   /* fluid side padding so content never touches the edge */
 
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --e-rise: cubic-bezier(0.16, 1, 0.3, 1);   /* smooth expo-out for scroll reveals */
