@@ -25,11 +25,14 @@
     doordash: "https://www.doordash.com/store/beijing-house-tampa-24308737/95348349/",
     cateringEmail: "mailto:catering@beijinghousefl.com",
     jobsEmail: "mailto:jobs@beijinghousefl.com",
-    instagram: "https://instagram.com/beijinghousefl",
-    facebook: "https://facebook.com/beijinghousefl",
-    tiktok: "https://www.tiktok.com/@beijinghousefl",
+    instagram: "https://instagram.com/beijinghousetampa",
+    facebook: "https://www.facebook.com/share/1JNJNvwadR/",
+    tiktok: "https://www.tiktok.com/@beijinghousetampa",
+    rednote: "https://www.xiaohongshu.com/search_result?keyword=Beijing%20House%20Tampa",
+    wechat: "BEIJINGHOUSETAMPA",
     website: "https://beijinghousefl.com"
   };
+  var currentCfg = DEFAULTS;
 
   /* ---- utilities ---- */
   function rel(p) { return (typeof p === "string" && p.charAt(0) === "/") ? p.slice(1) : p; }
@@ -37,9 +40,14 @@
 
   function apply(c) {
     try {
+      currentCfg = c;
       // reserve/tel default to a phone link built from the phone number
       if (!c.tel) c.tel = "tel:" + (c.phone || "").replace(/[^0-9+]/g, "");
       if (!c.reserve) c.reserve = c.tel;
+
+      // WeChat is an ID, not a URL — surface it in the tooltip (click copies it)
+      var wcTip = document.querySelector("[data-wechat] .soc__tip");
+      if (wcTip) wcTip.textContent = c.wechat ? "WeChat · " + c.wechat : "WeChat";
 
       // Links: <a data-link="uber"> → href
       document.querySelectorAll("[data-link]").forEach(function (el) {
@@ -115,6 +123,32 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (json) { if (json) apply(Object.assign({}, DEFAULTS, json)); })
       .catch(function () { /* keep defaults */ });
+  }
+
+  /* ---- WeChat: copy the ID to clipboard on click (it's not a URL) ---- */
+  var wechatLink = document.querySelector("[data-wechat]");
+  if (wechatLink) {
+    wechatLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      var id = (currentCfg && currentCfg.wechat) || "";
+      if (!id) return;
+      var tip = wechatLink.querySelector(".soc__tip");
+      var flash = function () {
+        if (!tip) return;
+        tip.textContent = "Copied ✓";
+        setTimeout(function () { tip.textContent = "WeChat · " + id; }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(id).then(flash, function () {});
+      } else {
+        try {
+          var t = document.createElement("textarea");
+          t.value = id; t.style.position = "fixed"; t.style.opacity = "0";
+          document.body.appendChild(t); t.select(); document.execCommand("copy");
+          document.body.removeChild(t); flash();
+        } catch (err) {}
+      }
+    });
   }
 
   /* ---- Current year ---- */

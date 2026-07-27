@@ -53,7 +53,7 @@ collections:
           - { name: facebook, label: Facebook URL, widget: string, required: false }
           - { name: tiktok, label: TikTok URL, widget: string, required: false }
           - { name: rednote, label: "RedNote / 小红书 URL", widget: string, required: false }
-          - { name: wechat, label: "WeChat / 微信 link", widget: string, required: false }
+          - { name: wechat, label: "WeChat / 微信 ID (not a URL — click-to-copy)", widget: string, required: false }
           - { name: website, label: Website URL, widget: string, required: false }
 
           # ---- Hero media ----
