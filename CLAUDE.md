@@ -44,7 +44,19 @@ the HTML and hidden **before first paint** via a `has-js` flag (inline `<script>
 - `a-rise` — fade + rise (content blocks/cards; grid children stagger via JS `transitionDelay`)
 - `a-head` — section heading **wipes up** (clip-path) while its eyebrow rises
 - `a-img` — big feature photos **curtain-reveal** (`.story__photo`, `.catering__photo`)
-`js/main.js` adds `is-in` on IntersectionObserver. Plus a **parallax engine** (rAF, in `main.js`): the hero footage drifts on scroll via `transform` (video is oversized `top:-15%;height:130%` so the drift never shows edges; desktop only), and feature/dish photos **pan in their frames** via `background-position-y` (frames are `background-size:100% 132%` so there's room; real photos use `cover` from `.has-image`). Using transform for the hero and background-position for photos keeps parallax from fighting the reveal transitions. Also: animated gold nav underlines and the horizontal **dish marquee** (`.marquee`). All disabled under `prefers-reduced-motion`; degrades to fully-visible without JS.
+## Scroll experience (Lenis + GSAP stack)
+The premium scroll/parallax is driven by four vendored libraries in `js/vendor/`
+(no CDN at runtime): **Lenis** (smooth scroll), **GSAP + ScrollTrigger** (scroll
+animation), **SplitType** (text splitting). Loaded in `index.html` before `main.js`.
+Wired up in `main.js` (feature-detected; all optional):
+- **Lenis** smooth scroll, synced to GSAP (`lenis.on('scroll', ScrollTrigger.update)` + `gsap.ticker`). In-page anchor links are routed through `lenis.scrollTo`. Native/untouched on mobile (Lenis leaves touch alone).
+- **Reveals**: `.a-rise` / `.a-head` / `.a-img` get `is-in` toggled by **ScrollTrigger** (NOT IntersectionObserver — that fights Lenis). CSS still defines the hidden/revealed states.
+- **Parallax**: real photos live in an oversized `.ph-fill` layer inside their overflow-hidden frame; GSAP scrubs `yPercent` (-10→10) on scroll = smooth transform parallax, never distorts. Hero video drifts (desktop only, `#top` scrub).
+- **Headings**: `.section__head .display` are split into chars by SplitType and revealed letter-by-letter (GSAP stagger on ScrollTrigger). Hidden via `.has-js .a-head .display{opacity:0}` until then.
+- **Fallback**: if `prefers-reduced-motion` OR any lib is missing/errors → no smooth scroll, reveals fall back to IntersectionObserver, headings shown (`showHeadings()`). Never leaves content hidden.
+Also: animated gold nav underlines and the horizontal **dish marquee** (`.marquee`).
+
+**Adding a photo** (dish/story/catering): it needs the `.ph-fill` inner layer, not a background on the frame. Hardcode: `<div class="dish__photo has-image"><div class="ph-fill" style="background-image:url(...)"></div></div>`. Via CMS: `fillPhoto()` in `main.js` creates the `.ph-fill` automatically.
 
 ## How content binding works
 - `content/site.json` is the source of truth. `js/main.js` fetches it and applies it to the DOM; if the fetch fails (e.g. `file://`), the baked-in `DEFAULTS` object keeps the page populated.

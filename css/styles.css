@@ -331,7 +331,14 @@ p { margin: 0 0 1.1em; }
   letter-spacing: 0.14em; text-transform: uppercase; color: rgba(91,77,60,0.45);
 }
 [data-slot].has-image::after { content: none; }
-.has-image { background-size: cover; background-position: center; }
+/* Real photos live in a .ph-fill layer, oversized so GSAP can parallax it
+   (translate on scroll) inside the overflow-hidden frame without gaps. */
+.ph-fill {
+  position: absolute; top: -15%; left: 0; width: 100%; height: 130%; z-index: 0;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  will-change: transform;
+}
+.dish__photo.has-image, .story__photo.has-image, .catering__photo.has-image { background: none; }
 
 /* ---- Story (dark atmospheric break) ---- */
 .story { background: var(--dark-2); color: var(--parchment); }
@@ -364,12 +371,10 @@ p { margin: 0 0 1.1em; }
   height: 460px; position: relative; overflow: hidden;
   background: linear-gradient(150deg, #d9c7a6, #cbb891); border: 1px solid var(--stone);
 }
-/* Placeholders only: oversize the gradient fill so JS can pan it (parallax).
-   Real photos (.has-image) use `cover` so they never distort with card width. */
+/* Placeholder frames (no photo yet) just show their gradient fill. */
 .dish__photo:not(.has-image), .story__photo:not(.has-image), .catering__photo:not(.has-image) {
-  background-size: 100% 132%; background-repeat: no-repeat; background-position-x: center;
+  background-repeat: no-repeat; background-position: center;
 }
-.has-image { background-repeat: no-repeat; }
 .catering__p { font-size: 15px; line-height: 1.7; color: var(--espresso); margin: 0 0 30px; max-width: var(--maxw-text); }
 .catering__buttons { display: flex; gap: 14px; flex-wrap: wrap; }
 
@@ -458,12 +463,12 @@ p { margin: 0 0 1.1em; }
 
 /* heading wipe — the signature flourish on section headings */
 .has-js .a-head .eyebrow { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--e-rise), transform .7s var(--e-rise); }
-.has-js .a-head .display {
-  opacity: 0; clip-path: inset(0 0 110% 0); transform: translateY(0.22em);
-  transition: clip-path 1.05s var(--e-rise), transform 1.05s var(--e-rise), opacity .55s ease;
-}
+/* Section headings hidden until GSAP runs the letter-by-letter reveal (main.js).
+   Shown via the reduced-motion / no-GSAP fallback (opacity:1). */
+.has-js .a-head .display { opacity: 0; }
 .has-js .a-head.is-in .eyebrow { opacity: 1; transform: none; }
-.has-js .a-head.is-in .display { opacity: 1; clip-path: inset(0 0 -14% 0); transform: none; transition-delay: .12s; }
+/* char spans created by SplitType */
+.a-head .display .char { display: inline-block; will-change: transform, opacity; }
 
 /* image curtain reveal — big feature photos uncover upward */
 .has-js .a-img { opacity: 0; clip-path: inset(0 0 100% 0); transition: clip-path 1.15s var(--e-rise), opacity .5s ease; }

@@ -110,10 +110,13 @@
     if (!url) return;
     fillPhoto(document.querySelector('[data-photo="' + attr + '"]'), url);
   }
-  function fillPhoto(el, url) {
-    if (!el || !url) return;
-    el.style.backgroundImage = "url('" + rel(url) + "')";
-    el.classList.add("has-image");
+  function fillPhoto(frame, url) {
+    if (!frame || !url) return;
+    // Real photos live in an oversized .ph-fill layer (for the parallax transform)
+    var inner = frame.querySelector(".ph-fill");
+    if (!inner) { inner = document.createElement("div"); inner.className = "ph-fill"; frame.appendChild(inner); }
+    inner.style.backgroundImage = "url('" + rel(url) + "')";
+    frame.classList.add("has-image");
   }
 
   /* Load CMS content, then apply (defaults applied first regardless). */
@@ -188,64 +191,108 @@
     });
   }
 
-  /* ---- Scroll-reveal ----
-     Effect classes (a-rise / a-head / a-img) are set in the HTML and hidden
-     via `.has-js` before first paint. Here we just stagger grid cards and add
-     `is-in` when each element scrolls into view. Degrades to fully-visible if
-     JS never runs; honors prefers-reduced-motion. */
+  /* =============================================================
+     Scroll experience — Lenis smooth scroll + GSAP parallax + text reveals
+     (the "Amrit" stack). Content blocks/images still reveal via
+     IntersectionObserver; GSAP drives the scroll-linked parallax and the
+     letter-by-letter heading reveals. Degrades gracefully:
+       · reduced-motion or libs missing -> no smooth scroll, headings shown,
+         content revealed instantly.
+     ============================================================= */
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
+  var hasSplit = typeof SplitType !== "undefined";
+  var hasLenis = typeof Lenis !== "undefined";
+  var headings = document.querySelectorAll(".section__head .display");
+  function showHeadings() { headings.forEach(function (el) { el.style.opacity = "1"; }); }
 
-  // Stagger cards within the order and menu grids
+  // Slight per-card stagger within grids (applies to the CSS transition)
   document.querySelectorAll(".order-grid > .a-rise, .dish-grid > .a-rise").forEach(function (el) {
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
     el.style.transitionDelay = (i * 0.08).toFixed(2) + "s";
   });
+  var revealEls = document.querySelectorAll(".a-rise, .a-head, .a-img");
 
-  var animated = document.querySelectorAll(".a-rise, .a-head, .a-img");
-  if (reduce || !("IntersectionObserver" in window)) {
-    animated.forEach(function (el) { el.classList.add("is-in"); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
-    animated.forEach(function (el) { io.observe(el); });
-  }
-
-  /* ---- Parallax: hero footage drifts, feature/dish photos pan in their frames.
-     Uses transform (hero) and background-position (photos) so it never fights the
-     reveal transitions. Disabled for reduced-motion; hero drift off on mobile. */
-  if (!reduce) {
-    var heroV = document.getElementById("heroVideo");
-    var pxPhotos = Array.prototype.slice.call(
-      document.querySelectorAll(".story__photo, .catering__photo, .dish__photo"));
-    var wide = window.matchMedia("(min-width: 821px)");
-    var pTick = false;
-    function parallax() {
-      var vh = window.innerHeight || 800;
-      if (heroV) {
-        if (wide.matches) {
-          var y = window.pageYOffset;
-          if (y < vh * 1.15) heroV.style.transform = "translate3d(0," + (y * 0.12).toFixed(1) + "px,0)";
-        } else {
-          heroV.style.transform = "";
-        }
-      }
-      for (var i = 0; i < pxPhotos.length; i++) {
-        var el = pxPhotos[i], r = el.getBoundingClientRect();
-        if (r.bottom < -80 || r.top > vh + 80) continue;
-        var prog = (r.top + r.height / 2 - vh / 2) / (vh + r.height); // ~ -0.5..0.5
-        el.style.backgroundPositionY = (50 - prog * 24).toFixed(1) + "%";
-      }
-      pTick = false;
+  if (reduce || !hasGSAP) {
+    /* ---- No smooth scroll: reveal via IntersectionObserver; show headings ---- */
+    showHeadings();
+    if (reduce || !("IntersectionObserver" in window)) {
+      revealEls.forEach(function (el) { el.classList.add("is-in"); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add("is-in"); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      revealEls.forEach(function (el) { io.observe(el); });
     }
-    var onParallax = function () { if (!pTick) { requestAnimationFrame(parallax); pTick = true; } };
-    window.addEventListener("scroll", onParallax, { passive: true });
-    window.addEventListener("resize", onParallax, { passive: true });
-    parallax();
+  } else {
+    try {
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* ---- Lenis smooth scroll, synced to GSAP ---- */
+      if (hasLenis) {
+        var lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+        // route in-page anchor links through Lenis so they scroll smoothly
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+          a.addEventListener("click", function (e) {
+            var id = a.getAttribute("href");
+            if (!id || id === "#") return;
+            var target = id === "#top" ? 0 : document.querySelector(id);
+            if (target === null || target === undefined) return;
+            e.preventDefault();
+            lenis.scrollTo(target, { duration: 1.1 });
+            closeMenu();
+          });
+        });
+      }
+
+      /* ---- Content reveals: ScrollTrigger toggles the CSS is-in state ---- */
+      revealEls.forEach(function (el) {
+        ScrollTrigger.create({
+          trigger: el, start: "top 88%", once: true,
+          onEnter: function () { el.classList.add("is-in"); }
+        });
+      });
+
+      /* ---- Parallax: feature/dish photos drift within their frames ---- */
+      gsap.utils.toArray(".has-image > .ph-fill").forEach(function (inner) {
+        gsap.fromTo(inner, { yPercent: -10 }, {
+          yPercent: 10, ease: "none",
+          scrollTrigger: { trigger: inner.parentNode, start: "top bottom", end: "bottom top", scrub: true }
+        });
+      });
+
+      /* ---- Hero footage drift (desktop only) ---- */
+      var heroV = document.getElementById("heroVideo");
+      if (heroV && window.matchMedia("(min-width: 1025px)").matches) {
+        gsap.to(heroV, { yPercent: 12, ease: "none",
+          scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: true } });
+      }
+
+      /* ---- Letter-by-letter heading reveals (SplitType) ---- */
+      if (hasSplit && headings.length) {
+        headings.forEach(function (el) {
+          try {
+            var split = new SplitType(el, { types: "words, chars", tagName: "span" });
+            gsap.set(el, { opacity: 1 });
+            gsap.from(split.chars, {
+              opacity: 0, yPercent: 40, ease: "power2.out", duration: 0.5,
+              stagger: { amount: 0.5 },
+              scrollTrigger: { trigger: el, start: "top 82%", once: true }
+            });
+          } catch (e2) { el.style.opacity = "1"; }
+        });
+      } else {
+        showHeadings();
+      }
+
+      ScrollTrigger.refresh();
+    } catch (err) {
+      showHeadings();
+    }
   }
 })();

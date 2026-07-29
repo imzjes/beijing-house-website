@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=9">
 </head>
 <body>
 
@@ -183,28 +183,28 @@
     <div class="dish-grid">
 
       <article class="dish reveal a-rise" data-dish="0">
-        <div class="dish__photo has-image" style="background-image:url('assets/img/dish-chongqing-chicken.webp')"></div>
+        <div class="dish__photo has-image"><div class="ph-fill" style="background-image:url('assets/img/dish-chongqing-chicken.webp')"></div></div>
         <div class="dish__cn">重庆辣子鸡</div>
         <h3 class="dish__en">Chongqing Spicy Chicken</h3>
         <p class="dish__desc">Crispy chicken stir-fried with dried chilies, Sichuan peppercorns, garlic, and scallions.</p>
       </article>
 
       <article class="dish reveal a-rise" data-dish="1">
-        <div class="dish__photo has-image" style="background-image:url('assets/img/dish-mongolian-beef.webp')"></div>
+        <div class="dish__photo has-image"><div class="ph-fill" style="background-image:url('assets/img/dish-mongolian-beef.webp')"></div></div>
         <div class="dish__cn">蒙古牛</div>
         <h3 class="dish__en">Mongolian Beef</h3>
         <p class="dish__desc">Tender beef wok-tossed with onions, scallions, and peppers in a savory, mildly spicy brown sauce.</p>
       </article>
 
       <article class="dish reveal a-rise" data-dish="2">
-        <div class="dish__photo has-image" style="background-image:url('assets/img/dish-green-beans.webp')"></div>
+        <div class="dish__photo has-image"><div class="ph-fill" style="background-image:url('assets/img/dish-green-beans.webp')"></div></div>
         <div class="dish__cn">干煸四季豆</div>
         <h3 class="dish__en">Green Beans with Minced Pork</h3>
         <p class="dish__desc">Crisp green beans stir-fried with minced pork and dried chilies in a savory Sichuan-style sauce.</p>
       </article>
 
       <article class="dish reveal a-rise" data-dish="3">
-        <div class="dish__photo has-image" style="background-image:url('assets/img/dish-pickled-fish.webp')"></div>
+        <div class="dish__photo has-image"><div class="ph-fill" style="background-image:url('assets/img/dish-pickled-fish.webp')"></div></div>
         <div class="dish__cn">金汤酸菜鱼</div>
         <h3 class="dish__en">Fish in Golden Broth</h3>
         <p class="dish__desc">Tender swai fillet simmered with pickled greens, bean sprouts, glass noodles, and cilantro in a tangy golden broth.</p>
@@ -242,7 +242,7 @@
         </div>
       </div>
     </div>
-    <div class="story__photo reveal a-img has-image" style="background-image:url('assets/img/interior.jpg')" data-photo="story_photo"></div>
+    <div class="story__photo reveal a-img has-image" data-photo="story_photo"><div class="ph-fill" style="background-image:url('assets/img/interior.jpg')"></div></div>
   </div>
 </section>
 
@@ -392,6 +392,10 @@
 }
 </script>
 
-<script src="js/main.js?v=8"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/split-type.min.js"></script>
+<script src="js/main.js?v=9"></script>
 </body>
 </html>
