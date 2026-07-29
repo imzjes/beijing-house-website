@@ -331,7 +331,7 @@ p { margin: 0 0 1.1em; }
   letter-spacing: 0.14em; text-transform: uppercase; color: rgba(91,77,60,0.45);
 }
 [data-slot].has-image::after { content: none; }
-[data-slot].has-image { background-size: cover; background-position: center; }
+.has-image { background-size: cover; background-position: center; }
 
 /* ---- Story (dark atmospheric break) ---- */
 .story { background: var(--dark-2); color: var(--parchment); }

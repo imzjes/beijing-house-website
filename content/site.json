@@ -18,12 +18,12 @@
   "rednote": "https://www.xiaohongshu.com/search_result?keyword=Beijing%20House%20Tampa",
   "wechat": "BEIJINGHOUSETAMPA",
   "website": "https://beijinghousefl.com",
-  "story_photo": "",
+  "story_photo": "assets/img/interior.jpg",
   "catering_photo": "",
   "dishes": [
-    { "cn": "麻辣香锅", "en": "Griddle-Cooked Spicy Pot", "desc": "Build-your-own dry pot, wok-seared with chili, peppercorn, and our house spice blend.", "photo": "" },
-    { "cn": "水煮鱼", "en": "Spicy Boiled Fish", "desc": "Silky fish fillets in roiling chili broth, finished with sizzling hot oil.", "photo": "" },
-    { "cn": "红油抄手", "en": "Chili Oil Wontons", "desc": "Hand-folded wontons bathed in our slow-infused house chili oil.", "photo": "" },
-    { "cn": "京味经典", "en": "Northern Classics", "desc": "Hand-pulled noodles, dumplings, and the comfort dishes of old Beijing.", "photo": "" }
+    { "cn": "重庆辣子鸡", "en": "Chongqing Spicy Chicken", "desc": "Crispy chicken stir-fried with dried chilies, Sichuan peppercorns, garlic, and scallions.", "photo": "assets/img/dish-chongqing-chicken.webp" },
+    { "cn": "蒙古牛", "en": "Mongolian Beef", "desc": "Tender beef wok-tossed with onions, scallions, and peppers in a savory, mildly spicy brown sauce.", "photo": "assets/img/dish-mongolian-beef.webp" },
+    { "cn": "干煸四季豆", "en": "Green Beans with Minced Pork", "desc": "Crisp green beans stir-fried with minced pork and dried chilies in a savory Sichuan-style sauce.", "photo": "assets/img/dish-green-beans.webp" },
+    { "cn": "金汤酸菜鱼", "en": "Fish in Golden Broth", "desc": "Tender swai fillet simmered with pickled greens, bean sprouts, glass noodles, and cilantro in a tangy golden broth.", "photo": "assets/img/dish-pickled-fish.webp" }
   ]
 }
