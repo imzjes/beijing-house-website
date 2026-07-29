@@ -234,7 +234,7 @@ p { margin: 0 0 1.1em; }
 }
 .hero-btn:hover { transform: translateY(-2px); }
 .hero-btn--primary { background: var(--parchment); color: var(--ink); border-color: var(--parchment); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-.hero-btn--primary:hover { background: #fff; border-color: #fff; color: var(--ink); }
+.hero-btn--primary:hover { background: var(--accent); border-color: var(--accent); color: var(--parchment); }
 .hero-btn--ghost { background: rgba(20,14,10,0.32); color: var(--parchment); border-color: var(--parchment); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
 .hero-btn--ghost:hover { background: var(--parchment); border-color: var(--parchment); color: var(--ink); }
 
