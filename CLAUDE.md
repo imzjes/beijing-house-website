@@ -1,7 +1,26 @@
 # Beijing House — Website
 
 Static marketing site for Beijing House (authentic Chinese restaurant, Tampa FL).
-No backend, no build step, no dependencies — plain HTML/CSS/JS. Deploys to GitHub Pages (or Netlify/Cloudflare Pages).
+No backend, no build step. Plain HTML/CSS/JS + a small set of **vendored** scroll
+libraries (`js/vendor/`: Lenis, GSAP, ScrollTrigger, SplitType — no runtime CDN).
+Deploys to GitHub Pages (or Netlify/Cloudflare Pages).
+
+## Current state & open items (read this first)
+**Section order** (top → bottom): Hero → **Our Story** (dark, interior photo) → dish marquee → **Signatures of the House** (4 dish cards) → **Order Tonight** → **Catering & Events** → **Find Us** → **Join the Family / hiring** (dark) → footer.
+
+**Done**: editorial "parchment" redesign; real red seal logo; **real menu dishes** (Chongqing Spicy Chicken 重庆辣子鸡 · Mongolian Beef 蒙古牛 · Green Beans with Minced Pork 干煸四季豆 · Fish in Golden Broth 金汤酸菜鱼 — names/descriptions from `assets/menu/menu.pdf`) with photos; **interior photo** in Story; footer **social icons** (IG/FB/TikTok/RedNote/WeChat — WeChat is click-to-copy the ID, not a link); Lenis+GSAP scroll stack; responsive at `@1200`; phone corrected to **(813) 513-8882**; hero CTAs = Order (cream→red hover) + View Menu.
+
+**Still placeholder / TODO**:
+- **Hero video** `assets/video/hero.mp4` is a *placeholder* clip (has baked-in text/branding) — swap for real Beijing House kitchen footage (keep ≤3–8 MB, muted, ≤1080p).
+- **Catering photo** — none provided; `#catering` still shows the gradient placeholder (`data-slot="banquet spread"`).
+- **Rotate the GitHub OAuth client secret** — it was pasted in chat once. Do it via Cloudflare dashboard → Worker `beijing-house-cms-auth` → Variables → `GITHUB_CLIENT_SECRET` (also regenerate in the GitHub OAuth App). See `docs/ADMIN-SETUP.md`.
+- **RedNote** link is a Xiaohongshu *search* URL (no profile URL given); **Facebook/TikTok** URLs are the ones the owner gave — verify.
+- **Custom domain** `beijinghousefl.com` (on Wix) not yet pointed at Pages (steps in `README.md`).
+- Add the restaurant owner as a **repo collaborator** so they can use `/admin`.
+
+**Accounts/tooling** (this machine): `gh` authed as **imzjes**; `wrangler` logged in as **imalabekov@gmail.com** (account `0b8202d51fa4eea883b7490a2f5c08c7`). CMS worker `beijing-house-cms-auth` is deployed with `GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET` set; `/admin` login works. **No AI attribution in commits** (commit as imzjes / imalabekov@gmail.com).
+
+**Cache version**: `?v=9` on styles.css/main.js right now — bump on the next CSS/JS edit (see Cache-busting gotcha).
 
 ## Quick reference
 - **Live site**: https://imzjes.github.io/beijing-house-website/ (GitHub Pages, repo `imzjes/beijing-house-website`)
@@ -14,18 +33,20 @@ No backend, no build step, no dependencies — plain HTML/CSS/JS. Deploys to Git
 
 ## File map
 ```
-index.html          ← all page markup, one file (#top #order [marquee] #menu #story #catering #careers #visit)
-css/styles.css      ← design tokens, layout, responsive (@1024/@820/@560), scroll animations
-js/main.js          ← loads content/site.json (fallback DEFAULTS baked in), sticky header, mobile menu, reveals
+index.html          ← all page markup, one file. Order: #top #story [marquee] #menu #order #catering #visit #careers
+css/styles.css      ← design tokens, layout, responsive (@1200/@560), reveal/parallax CSS
+js/main.js          ← loads content/site.json (fallback DEFAULTS), sticky header, mobile menu, WeChat copy, + scroll stack
+js/vendor/          ← lenis.min.js, gsap.min.js, ScrollTrigger.min.js, split-type.min.js (loaded before main.js)
 content/site.json   ← EDITABLE content (CMS writes this): links, phone, hours, menu, dishes, photos
 admin/index.html    ← Sveltia CMS loader (owner login → edit form)
 admin/config.yml    ← CMS schema + GitHub backend (base_url = OAuth worker, see docs/ADMIN-SETUP.md)
 cms-auth/           ← Cloudflare Worker (sveltia-cms-auth) source + wrangler.toml for the /admin GitHub login
 docs/ADMIN-SETUP.md ← one-time CMS/OAuth + Cloudflare setup runbook
 assets/
-  img/              ← logo.png (red seal), hero-poster.jpg, ubereats.svg + doordash.svg (ink-tinted), dish/story/catering photos
-  video/            ← hero.mp4 (compressed loop)
-  menu/             ← menu.pdf (the live menu)
+  img/              ← logo.png (red seal), hero-poster.jpg, dish-*.webp (4 dishes), interior.jpg (Story),
+                       ubereats.svg + doordash.svg (ink-tinted), social/*.svg (5 platform icons)
+  video/            ← hero.mp4 (PLACEHOLDER clip — replace)
+  menu/             ← menu.pdf (the live menu; 33MB, could be compressed w/ ghostscript)
 .nojekyll           ← tells GitHub Pages to serve files as-is (no Jekyll processing)
 ```
 
@@ -38,13 +59,10 @@ Amrit-Palace-style reference, using Beijing House **red as the sole chromatic ac
 - **Layout**: `--maxw 2160px` (wide/near-full-bleed — fills large screens, caps ultra-wide) · `--gutter clamp(1.5rem,5vw,6rem)` (fluid side padding, content never touches the edge) · `--maxw-text 40rem` (prose stays ~66ch regardless of container). `.wrap` centers at `--maxw` with `--gutter` padding.
 - **Responsive breakpoints**: `@1200` is the single tablet/mobile switch — desktop nav → hamburger, mobile hero, order cards → 1-col stacked, menu → 2-col, story/catering/visit → 1-col. Set to 1200 (not 1024) because the wide horizontal nav (long labels like "RESERVE A TABLE") collides below ~1200. `@560` → menu 1-col, hero CTAs single dynamic-width row, catering buttons stack.
 
-## Scroll animations
-Editorial motion — slow, smooth, no bounce (expo-out `--e-rise`). Effect classes are set in
-the HTML and hidden **before first paint** via a `has-js` flag (inline `<script>` in `<head>`):
-- `a-rise` — fade + rise (content blocks/cards; grid children stagger via JS `transitionDelay`)
-- `a-head` — section heading **wipes up** (clip-path) while its eyebrow rises
-- `a-img` — big feature photos **curtain-reveal** (`.story__photo`, `.catering__photo`)
 ## Scroll experience (Lenis + GSAP stack)
+Reveal effect classes are set in the HTML and hidden **before first paint** via a `has-js`
+flag (inline `<script>` in `<head>`): `a-rise` (fade+rise, cards stagger via JS `transitionDelay`),
+`a-head` (eyebrow rises; the `.display` heading is a letter-by-letter reveal), `a-img` (curtain reveal).
 The premium scroll/parallax is driven by four vendored libraries in `js/vendor/`
 (no CDN at runtime): **Lenis** (smooth scroll), **GSAP + ScrollTrigger** (scroll
 animation), **SplitType** (text splitting). Loaded in `index.html` before `main.js`.
@@ -64,11 +82,13 @@ Also: animated gold nav underlines and the horizontal **dish marquee** (`.marque
 - Real text also lives literally in the HTML (good for SEO); the JSON overwrites it at runtime. Asset paths are normalized: a leading `/` is stripped so both `/assets/..` (CMS default) and `assets/..` (relative) work.
 
 ## Adding a real photo to a placeholder
-Slots are `<div data-slot="...">` with a gradient + caption. To use a real image, set it as a background and add `has-image`:
+Photos go in a `.ph-fill` inner layer (oversized so GSAP can parallax it without distortion),
+**not** as a background on the frame. Add `has-image` to the frame + a `.ph-fill` child:
 ```html
-<div class="dish__photo has-image" style="background-image:url('assets/img/mala.jpg')"></div>
+<div class="dish__photo has-image"><div class="ph-fill" style="background-image:url('assets/img/x.webp')"></div></div>
 ```
-(The `has-image` class hides the placeholder caption.)
+Via `/admin`, `fillPhoto()` in `main.js` creates the `.ph-fill` automatically. Frames still
+`overflow:hidden`; the empty catering frame keeps `data-slot="banquet spread"` (gradient + caption).
 
 ## Gotchas
 - **Hero video autoplay** needs `muted` + `playsinline` (both already set). iOS won't autoplay with sound.
@@ -76,9 +96,11 @@ Slots are `<div data-slot="...">` with a gradient + caption. To use a real image
 - **`.nojekyll` must exist** or GitHub Pages may mishandle files.
 - **Cache-busting**: `index.html` loads `css/styles.css?v=N` and `js/main.js?v=N`. GitHub Pages caches assets ~10 min, so **bump `N` whenever you edit styles.css or main.js** — otherwise browsers keep serving the old file (symptom: "I changed it but it still looks the same"). `content/site.json` is fetched with `cache:no-cache` so it's always fresh.
 - **Reduced motion**: animations are disabled under `prefers-reduced-motion` — don't move essential content behind a reveal without a visible fallback.
-- **Mobile hero (`@820`)**: the hero's own centered brand is hidden (the always-on sticky header carries branding — they collided otherwise); height is `100svh` and CTAs are bottom-pinned with `env(safe-area-inset-bottom)` so Safari's toolbar/home-indicator never covers them. Hero CTAs become one `flex:1 1 0` row at `@560`.
-- **Flex-column children stretch**: images inside a `flex-direction:column` card (order-card seal/brand marks) get distorted unless given `align-self: flex-start`. Same reason `.story__grid` uses `align-items: stretch` so `.story__photo` fills the column height instead of floating centered.
-- **Adding a real photo doesn't need code for CMS uploads** — the `image` widgets in `admin/config.yml` set `story_photo`/`catering_photo`/`dishes[].photo`; `js/main.js` applies them as `background-image` + `has-image`. Hand-editing: see "Adding a real photo" below.
+- **Single responsive breakpoint is `@1200`** (not 1024) — below it, everything switches to hamburger nav + mobile hero + stacked sections, because the wide horizontal nav (long labels) collides below ~1200. `@560` is the phone-only tweak (menu 1-col, hero CTAs single row).
+- **Mobile hero (`@1200`)**: the hero's own centered brand is hidden (the always-on sticky header carries branding — they collided otherwise); height is `100svh` and CTAs are bottom-pinned with `env(safe-area-inset-bottom)` so Safari's toolbar/home-indicator never covers them.
+- **Sticky `:hover` on touch**: a `@media (hover: none)` block resets interactive hover states so buttons don't look permanently pressed after tapping + returning from an external link.
+- **Flex-column children stretch**: images inside a `flex-direction:column` card (order-card seal/brand marks) get distorted unless given `align-self: flex-start`. Same reason `.story__grid` uses `align-items: stretch` so `.story__photo` fills the column height.
+- **CMS photo uploads** — `image`/`file` widgets in `admin/config.yml` set `story_photo`/`catering_photo`/`dishes[].photo`; `fillPhoto()` in `main.js` applies them into a `.ph-fill` layer (see "Adding a real photo").
 - **Verifying visually without the Chrome extension** (it's often disconnected): drive headless Chrome via CDP. `scratchpad/capture.js` connects to `chrome --headless=new --remote-debugging-port=9222`, emulates `prefers-reduced-motion:reduce` (so reveal elements are visible in a static shot), and captures full-page. **`--window-size` alone does NOT apply mobile media queries** — use `Emulation.setDeviceMetricsOverride{mobile:true}` for true mobile rendering.
 - **The Claude Design mockup had an "owner dashboard"** that saved edits to `localStorage` (only that one browser — visitors never saw it). Replaced with a real git-based CMS at `/admin` (Sveltia) that commits to `content/site.json`.
 - **CMS login needs the OAuth worker** — `admin/config.yml` `base_url` must point at the deployed Cloudflare Worker, or login silently fails. See `docs/ADMIN-SETUP.md`.
@@ -86,8 +108,8 @@ Slots are `<div data-slot="...">` with a gradient + caption. To use a real image
 
 ## Development rules (from the CurrencyApp playbook)
 - Clarify before coding; small increments over rewrites.
-- No unnecessary dependencies — keep it vanilla.
-- Never commit secrets (none needed here — all links are public).
+- Mostly vanilla — the only deps are the vendored scroll libraries (deliberate, owner-approved). Don't add more without asking.
+- Never commit secrets. **No AI attribution in commits** (commit as imzjes / imalabekov@gmail.com).
 - Fix warnings before moving on.
 
 ## Deploy
