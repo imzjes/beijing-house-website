@@ -227,8 +227,8 @@ p { margin: 0 0 1.1em; }
 /* Hero CTAs — solid-red primary + outlined secondary, rounded (reference style) */
 .hero-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 15px 34px; border-radius: 11px;
-  font-family: var(--sans); font-weight: 600; font-size: 16px; letter-spacing: 0;
+  padding: 16px 34px; border-radius: 3px;
+  font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase;
   border: 1.5px solid transparent; cursor: pointer;
   transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
 }
