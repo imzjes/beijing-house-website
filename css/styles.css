@@ -84,10 +84,23 @@ p { margin: 0 0 1.1em; }
 .eyebrow--gold { color: var(--accent); }
 
 /* Real seal logo */
-.brand-logo { display: block; width: auto; height: 40px; }
+.brand-logo { display: block; width: auto; height: 40px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
 .brand-logo--hero { height: 42px; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5)); }
 .site-header__brand .brand-logo { height: 32px; }
 .footer__brand .brand-logo { height: 44px; }
+
+/* Brand link hover: no red/underline (unlike the nav) — a subtle seal "stamp" instead */
+.hero__nav a.hero__brand:hover { color: var(--parchment); }
+.hero__nav a.hero__brand::after { content: none; }
+.site-header__brand:hover { color: var(--ink); }
+.hero__brand-name, .site-header__name { transition: letter-spacing .5s var(--ease); }
+.hero__brand:hover .brand-logo,
+.site-header__brand:hover .brand-logo { transform: rotate(-6deg) scale(1.08); }
+.hero__brand:hover .hero__brand-name { letter-spacing: 0.13em; }
+.site-header__brand:hover .site-header__name { letter-spacing: 0.05em; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__brand:hover .brand-logo, .site-header__brand:hover .brand-logo { transform: none; }
+}
 
 /* ============================================================= */
 /*  Buttons — ghost / outlined only, sharp 3px radius             */
