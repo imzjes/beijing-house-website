@@ -484,29 +484,28 @@ p { margin: 0 0 1.1em; }
 /* ============================================================= */
 /*  Responsive                                                    */
 /* ============================================================= */
-@media (max-width: 1024px) {
-  .order-grid { grid-template-columns: 1fr 1fr; }
-  .order-card { border-bottom: 1px solid var(--stone); }
-  .order-card:nth-child(2) { border-right: none; }
-  .order-card--feature { grid-column: 1 / -1; }
-  .dish-grid { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 820px) {
+/* Tablet & below — switch to the hamburger + mobile layout at 1200 so the wide
+   horizontal nav (long labels) never cramps/collides, and content stacks cleanly. */
+@media (max-width: 1200px) {
   .section { padding: clamp(4rem, 12vw, 6rem) 0; }
 
-  /* Mobile hero: sticky header shows branding, so hide the hero's own nav/brand
-     (they collided with the fixed header). Pin the CTAs to the bottom of the
-     visible viewport — svh keeps the bottom above the browser toolbar, and the
-     safe-area inset clears the home indicator. */
+  /* Nav -> hamburger; hero goes mobile (sticky header carries branding, so the
+     hero's own nav/brand are hidden). CTAs pin to the bottom of the visible
+     viewport — svh keeps them above the browser toolbar; safe-area clears the
+     home indicator. */
   .hero { height: 100svh; min-height: 480px; }
   .hero__nav { display: none; }
   .hero__actions { padding: 0 20px calc(26px + env(safe-area-inset-bottom)); }
-
   .site-header { transform: translateY(0); padding: 12px 22px; }
   .site-header__nav { display: none; }
   .nav-toggle { display: flex; }
   .site-header__name { font-size: 17px; }
+
+  /* Order cards stack full-width (no lopsided full-width feature card) */
+  .order-grid { grid-template-columns: 1fr; }
+  .order-card { border-right: none; border-bottom: 1px solid var(--stone); }
+  .order-card:last-child { border-bottom: none; }
+  .dish-grid { grid-template-columns: 1fr 1fr; }
 
   .story__grid, .catering__grid { grid-template-columns: 1fr; gap: 40px; }
   .catering__photo { order: 2; }
@@ -524,8 +523,6 @@ p { margin: 0 0 1.1em; }
 }
 
 @media (max-width: 560px) {
-  .order-grid { grid-template-columns: 1fr; }
-  .order-card { border-right: none; }
   .dish-grid { grid-template-columns: 1fr; }
   .hero__buttons { flex-direction: row; flex-wrap: nowrap; width: 100%; gap: 12px; }
   .hero__buttons .hero-btn { flex: 1 1 0; padding-left: 14px; padding-right: 14px; font-size: 15px; }

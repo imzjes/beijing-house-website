@@ -36,7 +36,7 @@ Amrit-Palace-style reference, using Beijing House **red as the sole chromatic ac
 - **Type**: `--serif` Cormorant Garamond (whisper-weight **300**, UPPERCASE headings, tight negative tracking) · `--sans` Inter (body/nav/buttons, 500) · `--sc` Noto Serif SC (Chinese only). Section headings use `.display`; the long Story headline is scoped smaller via `.story .display`.
 - **Geometry**: 0px radius on cards/sections/images; 3px only on buttons/tags. Buttons are ghost/outlined (`.btn--outline/--cream` = ink, `.btn--solid/--gold` = accent). No filled chromatic fills except the primary hover.
 - **Layout**: `--maxw 2160px` (wide/near-full-bleed — fills large screens, caps ultra-wide) · `--gutter clamp(1.5rem,5vw,6rem)` (fluid side padding, content never touches the edge) · `--maxw-text 40rem` (prose stays ~66ch regardless of container). `.wrap` centers at `--maxw` with `--gutter` padding.
-- **Responsive breakpoints**: `@1024` order/menu grids → 2-col · `@820` desktop nav → hamburger, story/catering/visit stack to 1-col, mobile hero (see gotchas) · `@560` grids → 1-col, hero CTAs → single dynamic-width row.
+- **Responsive breakpoints**: `@1200` is the single tablet/mobile switch — desktop nav → hamburger, mobile hero, order cards → 1-col stacked, menu → 2-col, story/catering/visit → 1-col. Set to 1200 (not 1024) because the wide horizontal nav (long labels like "RESERVE A TABLE") collides below ~1200. `@560` → menu 1-col, hero CTAs single dynamic-width row, catering buttons stack.
 
 ## Scroll animations
 Editorial motion — slow, smooth, no bounce (expo-out `--e-rise`). Effect classes are set in
