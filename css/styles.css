@@ -233,10 +233,10 @@ p { margin: 0 0 1.1em; }
   transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
 }
 .hero-btn:hover { transform: translateY(-2px); }
-.hero-btn--primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-.hero-btn--primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
-.hero-btn--ghost { background: rgba(20,14,10,0.28); color: var(--parchment); border-color: rgba(235,221,196,0.6); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
-.hero-btn--ghost:hover { background: rgba(235,221,196,0.14); border-color: var(--parchment); color: var(--parchment); }
+.hero-btn--primary { background: var(--parchment); color: var(--ink); border-color: var(--parchment); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+.hero-btn--primary:hover { background: #fff; border-color: #fff; color: var(--ink); }
+.hero-btn--ghost { background: rgba(20,14,10,0.32); color: var(--parchment); border-color: var(--parchment); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.hero-btn--ghost:hover { background: var(--parchment); border-color: var(--parchment); color: var(--ink); }
 
 /* Tertiary text link (e.g. "Get directions →") under the hero buttons */
 .hero-textlink {
@@ -530,4 +530,36 @@ p { margin: 0 0 1.1em; }
   .hero__buttons { flex-direction: row; flex-wrap: nowrap; width: 100%; gap: 12px; }
   .hero__buttons .hero-btn { flex: 1 1 0; padding-left: 14px; padding-right: 14px; font-size: 15px; }
   .catering__buttons { flex-direction: column; }
+}
+
+/* ============================================================= */
+/*  Touch devices — neutralize sticky :hover                      */
+/* ------------------------------------------------------------- */
+/*  On touchscreens a :hover state gets "stuck" after a tap (e.g. */
+/*  returning from an external Order/Menu link), so buttons look  */
+/*  permanently pressed. Reset the interactive hover states here; */
+/*  they still animate normally with a real pointer.              */
+/* ============================================================= */
+@media (hover: none) {
+  .hero-btn:hover { transform: none; }
+  .hero-btn--primary:hover { background: var(--parchment); color: var(--ink); border-color: var(--parchment); }
+  .hero-btn--ghost:hover { background: rgba(20,14,10,0.32); color: var(--parchment); border-color: var(--parchment); }
+  .btn:hover { transform: none; }
+  .btn--outline:hover, .btn--cream:hover { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn--solid:hover, .btn--gold:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
+  .hiring .btn--gold:hover { background: transparent; color: var(--parchment); border-color: rgba(235,221,196,0.55); }
+  .order-card:hover { background: transparent; }
+  .order-btn:hover { color: var(--ink); border-color: var(--ink); border-radius: 3px; }
+  .order-btn:hover .order-btn__arr--1 { right: 16px; }
+  .order-btn:hover .order-btn__arr--2 { left: -25%; }
+  .order-btn:hover .order-btn__text { transform: translateX(-12px); }
+  .order-btn:hover .order-btn__arr { fill: var(--ink); }
+  .order-btn:hover .order-btn__circle { width: 20px; height: 20px; opacity: 0; }
+  .order-card--feature .order-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .order-card--feature .order-btn:hover .order-btn__arr { fill: var(--accent); }
+  .socials .soc a:hover { transform: none; background: transparent; color: rgba(235,221,196,0.72); border-color: rgba(199,184,150,0.30); box-shadow: none; }
+  .socials .soc a:hover .soc__tip { opacity: 0; }
+  .hero__brand:hover .brand-logo, .site-header__brand:hover .brand-logo { transform: none; }
+  .hero__brand:hover .hero__brand-name { letter-spacing: 0.06em; }
+  .site-header__brand:hover .site-header__name { letter-spacing: 0.02em; }
 }
