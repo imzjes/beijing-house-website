@@ -364,9 +364,12 @@ p { margin: 0 0 1.1em; }
   height: 460px; position: relative; overflow: hidden;
   background: linear-gradient(150deg, #d9c7a6, #cbb891); border: 1px solid var(--stone);
 }
-/* Oversize the fill so JS can pan it vertically (parallax). Real photos use
-   cover (from .has-image); the extra height gives the pan somewhere to go. */
-.dish__photo, .story__photo, .catering__photo { background-size: 100% 132%; background-repeat: no-repeat; background-position-x: center; }
+/* Placeholders only: oversize the gradient fill so JS can pan it (parallax).
+   Real photos (.has-image) use `cover` so they never distort with card width. */
+.dish__photo:not(.has-image), .story__photo:not(.has-image), .catering__photo:not(.has-image) {
+  background-size: 100% 132%; background-repeat: no-repeat; background-position-x: center;
+}
+.has-image { background-repeat: no-repeat; }
 .catering__p { font-size: 15px; line-height: 1.7; color: var(--espresso); margin: 0 0 30px; max-width: var(--maxw-text); }
 .catering__buttons { display: flex; gap: 14px; flex-wrap: wrap; }
 
