@@ -238,14 +238,14 @@ p { margin: 0 0 1.1em; }
 .hero-btn--ghost { background: rgba(20,14,10,0.28); color: var(--parchment); border-color: rgba(235,221,196,0.6); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
 .hero-btn--ghost:hover { background: rgba(235,221,196,0.14); border-color: var(--parchment); color: var(--parchment); }
 
-/* "View the full menu →" text link */
-.hero-menu-link {
+/* Tertiary text link (e.g. "Get directions →") under the hero buttons */
+.hero-textlink {
   font-family: var(--sans); font-weight: 500; font-size: 15px; color: var(--parchment);
   border-bottom: 1px solid var(--gold); padding-bottom: 3px;
   text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   transition: color .3s var(--ease), border-color .3s var(--ease);
 }
-.hero-menu-link:hover { color: var(--gold); border-color: var(--gold); }
+.hero-textlink:hover { color: var(--gold); border-color: var(--gold); }
 
 /* ============================================================= */
 /*  Sections                                                      */
